@@ -9,6 +9,11 @@ import ChangePassword from "./pages/Auth/ChangePassword"
 import ResetPassword from "./pages/Auth/ResetPassword"
 import ForgotPassword from "./pages/Auth/ForgotPassword"
 import Home from "./pages/Home/Home"
+import SendComplaints from "./pages/SendComplaints/SendComplaints";
+import Complaints from "./pages/Complaints/Complaints";
+import Archive from "./pages/Archive/Archive";
+import Clients from "./pages/Clients/Clients";
+import Portfolio from "./pages/Portfolio/Portfolio";
 
 
 function App() {
@@ -37,17 +42,11 @@ function App() {
         {isLoggedIn && (
           <Route path="/Dental" element={<Dental />}>
             <Route path="Home" element={<Home />}></Route>
-            {/* <Route path="Consultation" element={<Consultation />}></Route>
-            <Route path="ConReview/:id" element={<ConReview />}></Route>
-            <Route path="ConRepley/:id" element={<ConRepley />}></Route>
-            <Route path="RevRepley/:id" element={<RevRepley />}></Route>
-            <Route
-              path="DoctorsAppointment/:id"
-              element={<DoctorsAppointment />}
-            ></Route>
-            <Route path="Review" element={<Review />}></Route>
-            <Route path="Appointment" element={<Dating />}></Route>
-            <Route path="Advices" element={<Advices />}></Route> */}
+            <Route path="Portfolio" element={<Portfolio />}></Route>
+            <Route path="Clients" element={<Clients />}></Route>
+            <Route path="Archive" element={<Archive />}></Route>
+            <Route path="Complaints" element={<Complaints />}></Route>
+            <Route path="SendComplaints" element={<SendComplaints />}></Route>
           </Route>
         )}
       </Routes>

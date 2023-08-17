@@ -3,18 +3,18 @@ import { useDispatch } from "react-redux";
 import { activeAction } from '../../store/active-ui';
 import { useEffect } from 'react';
 
-const Home = () => {
+const Clients = () => {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(activeAction.replaceActiveState('Home'))
-    }, [])
+    useEffect(()=>{
+        dispatch(activeAction.replaceActiveState('Clients'))
+    },[])
 
     return (
         <div className='pl-[260px]'>
-            Home
+            Clients
         </div>
     );
 }
 
-export default Home;
+export default Clients;

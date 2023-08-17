@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    Active: "Home"
-};  
+    activePage: ""
+};
 
 const activeSlice = createSlice({
     name: "active",
     initialState: initialState,
     reducers: {
         replaceActiveState(state, action) {
-            state.Active = action.payload;
+            state.activePage = action.payload;
         },
     }
 });

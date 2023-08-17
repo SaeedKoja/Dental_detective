@@ -1,10 +1,8 @@
 :root {
   --dark-color: #0C1D4A;
-  --blue-color: #C18CB3;
+  --blue-color: #7F9FC8;
   --ligth-color: #FFFFFF;
-  /* --gray-color: #40514e;
-  --greenLigth-color: #30e3ca;
-  --blue-color: #183e9f; */
+  --border-color: #C6C9CD;
 }
 
 ::placeholder {
@@ -35,6 +33,27 @@ body {
 
 body::-webkit-scrollbar {
   width: 0;
+}
+
+.form::after {
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 98%;
+  border-radius: 18px 0 0 18px ;
+  background-color: var(--dark-color);
+  left: 1px;
+}
+
+.form::before {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 80%;
+  border-radius: 18px 0 0 18px ;
+  background-color: var(--border-color);
+  left: 27%;
+  top: 10px;
 }
 
 .navbar ul li {

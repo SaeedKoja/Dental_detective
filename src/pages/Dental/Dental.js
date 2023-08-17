@@ -7,7 +7,7 @@ const Dental = () => {
     return (
         <div>
             <NavBar />
-            <Outlet></Outlet>
+            <Outlet></Outlet>   
         </div>
     );
 }
