@@ -58,10 +58,10 @@ const Login = () => {
   return (
     <div>
       <div
-        className='text-[#E4F9F5] relative flex items-center bg-[url("/src/global/images/flat-lay-health-still-life-arrangement-with-copy-space.jpg")]
-        w-[100%] h-[100vh] bg-no-repeat bg-cover'
+      style={{ backgroundImage: `url(${require("../../assets/images/flat-lay-health-still-life-arrangement-with-copy-space.jpg")})` }}
+        className='text-[var(--ligth-color)] relative flex items-center w-[100%] h-[100vh] bg-no-repeat bg-cover'
       >
-        <div className="z-40 w-[370px] h-[420px] rounded-2xl bg-[#11999E] absolute left-[60%] p-4 shadow-lg">
+        <div className="z-40 w-[370px] h-[420px] rounded-2xl bg-[var(--blue-color)] absolute left-[60%] p-4 shadow-lg">
           <div className="flex justify-center items-center flex-col">
             <h1 className="text-3xl font-bold">Login</h1>
             <hr className="mt-3 mb-4 w-[50%]"></hr>
@@ -148,13 +148,13 @@ const Login = () => {
             </p>
             <button
               type="submit"
-              className="text-slate-200 py-[10px] px-[35px] mx-auto my-[30px] font-bold bg-[#40514E] cursor-pointer shadow-lg rounded-lg"
+              className="text-slate-200 py-[10px] px-[35px] mx-auto my-[30px] font-bold bg-[var(--dark-color)] cursor-pointer shadow-lg rounded-lg"
             >
               Login
             </button>
             <p className="text-center">
               Don't have an account?
-              <NavLink to="/Register" className="text-[var(--gray-color)]">
+              <NavLink to="/Register" className="text-[var(--dark-color)]">
                 Sign up
               </NavLink>
             </p>

@@ -2,8 +2,8 @@ import React from 'react';
 
 const Home = () => {
     return (
-        <div>
-            dsdsd
+        <div className='ml-[270px]'>
+            ddddddddddddddd
         </div>
     );
 }
