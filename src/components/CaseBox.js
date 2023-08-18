@@ -1,7 +1,7 @@
 import React from 'react';
 import clock from '../assets/icons/clock.png';
 
-const CaseBox = ({ item, page, onReject ,onComplete}) => {
+const CaseBox = ({ item, page, onReject, onComplete, onApprove }) => {
     return (
         <div className='relative text-sm'>
             <div className='form mb-5 bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
@@ -12,8 +12,8 @@ const CaseBox = ({ item, page, onReject ,onComplete}) => {
                         <p>{item.time}</p>
                         {page === 1 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                         {page === 2 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
-                        {page === 3 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}  
-                        {page === 4 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}  
+                        {page === 3 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
+                        {page === 4 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                     </div>
                 </div>
                 <div className='w-[20%]'>
@@ -27,13 +27,13 @@ const CaseBox = ({ item, page, onReject ,onComplete}) => {
                     {page === 3 && <div className="flex justify-end items-center">
                         <div className="flex flex-col justify-between items-center">
                             <button
-                                type="submit"
+                                onClick={() => onApprove(item)}
                                 className={`w-[120px] mb-2 py-[9px] text-[var(--ligth-color)] font-bold bg-[#C18CB3] cursor-pointer rounded-lg`}
                             >
                                 approve
                             </button>
                             <button
-                                onClick={onReject}
+                                onClick={() => onReject(item)}
                                 className="w-[118px] border border-[#C18CB3] py-[7px] outline-none cursor-pointer font-bold rounded-lg text-[#C18CB3] "
                             >
                                 reject
@@ -43,7 +43,6 @@ const CaseBox = ({ item, page, onReject ,onComplete}) => {
                     {page === 4 && <div className="flex justify-end items-center">
                         <div className="flex flex-col justify-between items-center">
                             <button
-                                type="submit"
                                 className={`w-[120px] mb-2 py-[9px] text-[var(--ligth-color)] font-bold bg-[#C18CB3] cursor-pointer rounded-lg`}
                             >
                                 show notes

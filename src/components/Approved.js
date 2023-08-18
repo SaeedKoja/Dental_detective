@@ -2,6 +2,8 @@ import React from 'react';
 import CaseBox from './CaseBox';
 
 const Approved = () => {
+   
+
     const data =[
         {
             type:'type of case',
