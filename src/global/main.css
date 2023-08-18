@@ -106,3 +106,45 @@ body::-webkit-scrollbar {
 .swal-footer {
   display: none;
 }
+
+.rate box-icon {
+  font-size: 20px;
+}
+
+.child {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  /* justify-content: center; */
+  flex-direction: column;
+  margin: 10px 0;
+  /* align-items: center; */
+}
+.child input, .child textarea {
+  height: 45px;
+  background-color: transparent;
+  border-radius: 7px;
+  width: 100%;
+  padding: 0 15px;
+  border: 1px solid var(--blue-color) !important;
+  color: var(--gray-color);
+  opacity: 90%;
+  font-size: 15px;
+}
+.subchild {
+  width: 98% !important;
+}
+input:focus,textarea:focus {
+  outline: none;
+}
+.child label {
+  left: 14px;
+  position: absolute;
+  transition: 0.3s;
+  font-size: 15px;
+  top: -10px;
+  color: var(--blue-color);
+  padding: 0 10px;
+  background-color: var(--background-color);
+}
