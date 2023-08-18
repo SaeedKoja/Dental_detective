@@ -1,0 +1,31 @@
+.home ul li.active {
+    color: #C18CB3;
+    background-color: var(--dark-color);
+    transition: 0.2 ease-in-out;
+    padding-top: 6px;
+    width: 200px;
+    height: 40px;
+    border-radius: 30px;
+    text-align: center;
+  }
+  .home ul li.unactive:hover {
+    color: var(--border-color);
+    transition: 0.2 ease-in-out;
+    padding-top: 6px;
+    width: 200px;
+    height: 40px;
+    border-radius: 30px;
+    text-align: center;
+  }
+  .home li.unactive {
+    color: var(--ligth-color);
+    width: 200px;
+    height: 40px;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    padding-top: 6px;
+  }
+  .home ul li {
+    position: relative;
+    cursor: pointer;
+  }
