@@ -1,7 +1,8 @@
 import React from 'react';
 import clock from '../assets/icons/clock.png';
+import details from '../assets/icons/list.png';
 
-const CaseBox = ({ item, page, onReject, onComplete, onApprove }) => {
+const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes }) => {
     return (
         <div className='relative text-sm'>
             <div className='form mb-5 bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
@@ -20,7 +21,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove }) => {
                     <p className='mb-2'>{item.doctor}</p>
                     <p>{item.patient}</p>
                 </div>
-                <div className='w-[14%]'>
+                <div className='w-[20%] flex justify-between items-center'>
                     {page === 0 && <p className='text-[#C18CB3]'>archived</p>}
                     {page === 1 && <button className={` py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[#C18CB3] cursor-pointer rounded-xl`}>Complete</button>}
                     {page === 2 && <p className='text-[#C18CB3] text-md'>sended</p>}
@@ -43,6 +44,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove }) => {
                     {page === 4 && <div className="flex justify-end items-center">
                         <div className="flex flex-col justify-between items-center">
                             <button
+                                onClick={() => onShowNotes(item)}
                                 className={`w-[120px] mb-2 py-[9px] text-[var(--ligth-color)] font-bold bg-[#C18CB3] cursor-pointer rounded-lg`}
                             >
                                 show notes
@@ -55,6 +57,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove }) => {
                             </button>
                         </div>
                     </div>}
+                    <img src={details} className='w-[25px]'/>
                 </div>
             </div></div>
     );

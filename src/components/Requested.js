@@ -6,7 +6,7 @@ import DeleteItem from './DeleteItem';
 
 const Requested = () => {
     const [del, setDel] = useState();
-    const [showApproveForm, setshowApproveForm] = useState();
+    const [showApproveForm, setshowApproveForm] = useState(false);
     const [fetchAgain, setFetchAgain] = useState(false);
     const [formId, setFormtId] = useState("");
 

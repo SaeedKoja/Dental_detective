@@ -1,7 +1,11 @@
 import React from 'react';
 import CaseBox from './CaseBox';
+import NotesForm from './NotesForm';
+import { useState } from 'react';
 
 const Refuzed = () => {
+    const [showNotes, setShowNotes] = useState(false);
+
     const data = [
         {
             type: 'type of case',
@@ -40,11 +44,21 @@ const Refuzed = () => {
         },
     ]
 
+    const showNotesHandler = (item) => {
+        setShowNotes(item);
+    };
+
     return (
         <div>
+            {showNotes && (
+                <NotesForm
+                    item={showNotes}
+                    goBackHandler={()=>setShowNotes(false)}
+                />
+            )}
               {data.map((item, index) => {
                 return (
-                    <CaseBox item={item} key={index} page={4} />
+                    <CaseBox item={item} onShowNotes={showNotesHandler} key={index} page={4} />
                 )
             })}
         </div>
