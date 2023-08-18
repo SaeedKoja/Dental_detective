@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavBar.css';
 import logo1 from '../assets/logo/Graphicsfamily (11) 1.svg'
-import logo2 from '../assets/logo/Graphicsfamily (12) 1.svg'
+import logo2 from '../assets/logo/Graphicsfamily (12).svg'
 import home from '../assets/icons/home(1).png'
 import portfolio from '../assets/icons/user(1).png'
 import clients from '../assets/icons/group(1).png'
@@ -27,7 +27,7 @@ const NavBar = () => {
 
     return (
         <div className='navBar w-[260px] h-[100vh] fixed bg-[var(--dark-color)] py-5 rounded-r-3xl'>
-            <div className='flex justify-start px-4 items-start'>
+            <div className='flex justify-start px-4 items-end'>
                 <img src={logo1} alt='logo' className='w-[60px]'></img>
                 <img src={logo2} alt='logo' className='w-[80px]'></img>
             </div>

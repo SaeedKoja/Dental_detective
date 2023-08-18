@@ -31,7 +31,7 @@ const Archive = () => {
 
     return (
         <div className='pl-[300px] pr-5 py-5'>
-            <div className='mb-16 flex justify-between items-center '>
+            <div className='mb-16 w-[900px] flex justify-between items-center '>
                 <p className='text-[var(--blak-color)] text-4xl font-bold'>Archived forms</p>
                 <div className="relative">
                     <input

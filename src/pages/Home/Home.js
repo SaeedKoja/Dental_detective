@@ -11,7 +11,7 @@ const Home = () => {
     }, [])
 
     return (
-        <div className='pl-[260px]'>
+        <div className='pl-[300px] pr-5 py-5'>
             Home
         </div>
     );

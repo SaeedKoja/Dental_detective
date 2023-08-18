@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./DeleteItem.module.css";
 
-const DeleteItem = ({ button, content, onBack, onConfrim, title }) => {
+const DeleteItem = ({ button = "Delete", content = "? Are you sure to delete this record", onBack, onConfrim, title = "Delete the record"}) => {
   return (
     <div
       style={{ backgroundColor: "rgb(0 0 0 / 40%)" }}
@@ -17,14 +17,14 @@ const DeleteItem = ({ button, content, onBack, onConfrim, title }) => {
         <div className="w-[35%] flex justify-between items-center mt-5 mx-auto">
           <button
             onClick={onBack}
-            className="border border-[var(--gray-color)] px-[30px] py-[8px] outline-none cursor-pointer font-bold rounded-lg text-[var(--gray-color)] "
+            className="border border-[var(--dark-color)] px-[30px] py-[8px] outline-none cursor-pointer font-bold rounded-lg text-[var(--dark-color)] "
           >
             Back
           </button>
           <button
             type="submit"
             onClick={onConfrim}
-            className="py-[9px] text-[var(--p-color)] px-[25px] font-bold bg-[var(--gray-color)] cursor-pointer shadow-lg rounded-lg"
+            className="py-[9px] text-[var(--ligth-color)] px-[25px] font-bold bg-[var(--dark-color)] cursor-pointer shadow-lg rounded-lg"
           >
             {button}
           </button>

@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--p-color);
+  background-color: var(--background-color);
   width: 50%;
   margin: auto;
   /* height: 260 */
@@ -8,7 +8,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;
+  z-index: 1000;
   direction: rtl;
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
@@ -16,7 +16,7 @@
 .container .header h2 {
   padding-top: 20px;
   position: relative;
-  color: var(--gray-color);
+  color: var(--dark-color);
   display: flex;
   justify-content: center;
   font-size: 45px;
@@ -29,7 +29,7 @@
   top: 62%;
   right: 3%;
   border-radius: 100%;
-  background-color: var(--greenLigth-color);
+  background-color: var(--blue-color);
 }
 .container .header h2::after {
   content: "";
@@ -39,11 +39,12 @@
   top: 62%;
   left: 3%;
   border-radius: 100%;
-  background-color: var(--greenLigth-color);
+  background-color: var(--blue-color);
 }
 .container .content {
   padding: 20px;
   font-size: 16px;
   text-align: center;
-  color: var(--gray-color);
+  color: var(--dark-color);
+  opacity: 0.8;
 }
