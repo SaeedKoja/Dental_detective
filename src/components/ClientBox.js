@@ -7,7 +7,7 @@ import tel from '../assets/icons/phone-call.png';
 const ClientBox = ({doctor,onDelete,page='clients'}) => {
     return (
         <div className='relative'>
-            <div className='client flex flex-col items-center py-4 px-3 pt-10 border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]'>
+            <div className='client flex flex-col items-center py-4 px-3 pt-10 border-[2px] rounded-l-[18px] rounded-r-[18px] bg-white shadow-sm border-[var(--border-color)]'>
                 <img className='w-[30px] mb-7' src={user}></img>
                     <p className='text-xl font-bold text-[var(--dark-color)]'>{doctor.name}</p>
                 <p className='font-light text-[var(--border-color)]'>{doctor.email}</p>

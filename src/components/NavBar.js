@@ -26,7 +26,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className='navBar w-[260px] h-[100vh] fixed bg-[var(--dark-color)] py-5 rounded-r-3xl'>
+        <div className='navBar z-[10000] w-[260px] h-[100vh] fixed bg-[var(--dark-color)] py-5 rounded-r-3xl'>
             <div className='flex justify-start px-4 items-end'>
                 <img src={logo1} alt='logo' className='w-[60px]'></img>
                 <img src={logo2} alt='logo' className='w-[80px]'></img>
