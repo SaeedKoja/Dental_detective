@@ -1,5 +1,5 @@
 .home ul li.active {
-    color: #C18CB3;
+    color: var(--ligth-color);
     background-color: var(--dark-color);
     transition: 0.2 ease-in-out;
     padding-top: 6px;

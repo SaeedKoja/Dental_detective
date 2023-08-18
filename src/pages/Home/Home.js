@@ -7,10 +7,17 @@ import Refuzed from '../../components/Refuzed';
 import Requested from '../../components/Requested';
 import Approved from '../../components/Approved';
 import UnderTrial from '../../components/UnderTrial';
+import { useRef } from 'react';
+
 
 const Home = () => {
     const dispatch = useDispatch();
+    const pageRef = useRef(null);
     const [activePage, setActivePage] = useState("Approved")
+
+    useEffect(() => {
+        pageRef.current.scrollIntoView({ behavior: "smooth" });
+      }, []);
 
     useEffect(() => {
         dispatch(activeAction.replaceActiveState('Home'))
@@ -21,7 +28,7 @@ const Home = () => {
     }
 
     return (
-        <div className='pl-[300px] pr-5 py-5'>
+        <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
             <div className="home w-[100%] m-auto h-[40px] rounded-full bg-[var(--blue-color)] border border-[var(--blue-color)] mt-4 flex justify-center items-center">
                 <ul className="flex justify-between items-center w-[100%] mx-auto">
                     <li

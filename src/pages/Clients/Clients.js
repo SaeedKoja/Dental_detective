@@ -5,10 +5,12 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import DeleteItem from '../../components/DeleteItem';
 import ClientBox from '../../components/ClientBox';
+import { useRef } from 'react';
 
 const Clients = () => {
     const dispatch = useDispatch();
     const [del, setDel] = useState();
+    const pageRef = useRef(null);
     const [clientId, setClientId] = useState("");
     const data = [
         {
@@ -42,6 +44,10 @@ const Clients = () => {
             phone: '0936286430'
         },
     ]
+
+    useEffect(() => {
+        pageRef.current.scrollIntoView({ behavior: "smooth" });
+      }, []);
 
     const deleteClientHandler = (id) => {
         setClientId(id);
@@ -81,7 +87,7 @@ const Clients = () => {
     }
 
     return (
-        <div className='pl-[300px] pr-5 py-5'>
+        <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
             {del && (
                 <DeleteItem onConfrim={confrimHandler} onBack={() => setDel(false)} />
             )}

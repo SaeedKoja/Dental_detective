@@ -3,21 +3,27 @@ import { useDispatch } from "react-redux";
 import { activeAction } from '../../store/active-ui';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useRef } from 'react';
 
 const SendComplaints = () => {
     const dispatch = useDispatch();
-    const [message,setMessage] = useState('')
+    const pageRef = useRef(null);
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
         dispatch(activeAction.replaceActiveState('SendComplaints'))
     }, [])
+
+    useEffect(() => {
+        pageRef.current.scrollIntoView({ behavior: "smooth" });
+    }, []);
 
     const submitHandler = (e) => {
         e.preventDefault()
     }
 
     return (
-        <div className='pl-[220px]'>
+        <div className='pl-[220px]' ref={pageRef}>
             <div className='text-[var(--ligth-color)] relative w-[100%] h-[100vh] bg-no-repeat bg-cover' style={{ backgroundImage: `url(${require("../../assets/images/photo_2023-08-18_14-04-18.jpg")})` }}>
                 <div className="z-40 w-[400px] h-[360px] rounded-2xl bg-[var(--blue-color)] absolute left-[10%] top-8 p-4">
                     <div className="flex justify-center items-center flex-col">

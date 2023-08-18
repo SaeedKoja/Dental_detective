@@ -5,10 +5,12 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import DeleteItem from '../../components/DeleteItem';
 import ClientBox from '../../components/ClientBox';
+import { useRef } from 'react';
 
 const Complaints = () => {
     const dispatch = useDispatch();
     const [del, setDel] = useState();
+    const pageRef = useRef(null);
     const [clientId, setClientId] = useState("");
     const data = [
         {
@@ -58,6 +60,10 @@ const Complaints = () => {
         setDel(true);
     };
 
+    useEffect(() => {
+        pageRef.current.scrollIntoView({ behavior: "smooth" });
+      }, []);
+
     const confrimHandler = () => {
         // axios
         //     .delete(`${API.consultations.CONSULTATIONS}${conId}`, {
@@ -89,7 +95,7 @@ const Complaints = () => {
     const searchHandler = (e) => { }
 
     return (
-        <div className='pl-[300px] pr-5 py-5'>
+        <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
             {del && (
                 <DeleteItem onConfrim={confrimHandler} onBack={() => setDel(false)} />
             )}

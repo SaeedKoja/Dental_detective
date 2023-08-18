@@ -6,15 +6,16 @@ import user from '../../assets/images/7309681.jpg';
 import email from '../../assets/icons/mail.png';
 import tel from '../../assets/icons/phone-call.png';
 import location from '../../assets/icons/location.png';
-import img from '../../assets/images/close-up-hand-holding-dental-equipment.jpg';
 import edit from '../../assets/icons/pencil.png';
 import ProductBox from '../../components/productBox';
 import DeleteItem from '../../components/DeleteItem';
 import { useState } from 'react';
 import ProfileForm from '../../components/ProfileForm';
+import { useRef } from 'react';
 
 const Portfolio = () => {
     const dispatch = useDispatch();
+    const pageRef = useRef(null);
     const [del, setDel] = useState();
     const [editProfile, setEditProfile] = useState();
     const [fetchAgain, setFetchAgain] = useState(false);
@@ -43,6 +44,9 @@ const Portfolio = () => {
         //     });
     };
 
+    useEffect(() => {
+        pageRef.current.scrollIntoView({ behavior: "smooth" });
+      }, []);
 
     const data = [
         {
@@ -90,7 +94,7 @@ const Portfolio = () => {
     }, [])
 
     return (
-        <div className='pl-[300px] pr-5 py-5 text-[var(--dark-color)]'>
+        <div className='pl-[300px] pr-5 py-5 text-[var(--dark-color)]' ref={pageRef}>
             {del && (
                 <DeleteItem onConfrim={confrimHandler} onBack={() => setDel(false)} />
             )}
