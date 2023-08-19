@@ -1,11 +1,11 @@
 import React from 'react';
 import clock from '../assets/icons/clock.png';
-import details from '../assets/icons/list.png';
+import details from '../assets/icons/right-arrow.png';
 
-const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes }) => {
+const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onShowDetails }) => {
     return (
-        <div className='relative text-sm'>
-            <div className='form mb-5 bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
+        <div className='relative text-sm '>
+            <div className='form mb-5 h-[130px] bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
                 <p className='text-center w-[20%]'>{item.type}</p>
                 <div className='w-[20%] flex justify-center items-center'>
                     <img className='w-[20px] mr-2' src={clock}></img>
@@ -57,7 +57,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes }) =
                             </button>
                         </div>
                     </div>}
-                    <img src={details} className='w-[25px]'/>
+                    <img src={details} onClick={() => onShowDetails(item)} className='w-[25px] cursor-pointer' />
                 </div>
             </div></div>
     );

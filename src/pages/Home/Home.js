@@ -8,12 +8,14 @@ import Requested from '../../components/Requested';
 import Approved from '../../components/Approved';
 import UnderTrial from '../../components/UnderTrial';
 import { useRef } from 'react';
+import DetailsForm from '../../components/DetailsForm';
 
 
 const Home = () => {
     const dispatch = useDispatch();
     const pageRef = useRef(null);
     const [activePage, setActivePage] = useState("Approved")
+    const [showDetails, setShowDetails] = useState(false)
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
@@ -23,12 +25,20 @@ const Home = () => {
         dispatch(activeAction.replaceActiveState('Home'))
     }, [])
 
-    const searchHandler = (e) => {
+    const searchHandler = (e) => {}
 
+    const showDetailsHandler = (item) => {
+        setShowDetails(item)
     }
 
     return (
         <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
+            {showDetails && (
+                <DetailsForm
+                    item={showDetails}
+                    goBackHandler={()=>setShowDetails(false)}
+                />
+            )}
             <div className="home w-[100%] m-auto h-[40px] rounded-full bg-[var(--blue-color)] border border-[var(--blue-color)] mt-4 flex justify-center items-center">
                 <ul className="flex justify-between items-center w-[100%] mx-auto">
                     <li
@@ -38,10 +48,10 @@ const Home = () => {
                         Approved
                     </li>
                     <li
-                        className={activePage === "Under trial" ? "active" : "unactive"}
-                        onClick={() => setActivePage("Under trial")}
+                        className={activePage === "In progress" ? "active" : "unactive"}
+                        onClick={() => setActivePage("In progress")}
                     >
-                        Under trial
+                        In progress
                     </li>
                     <li
                         className={activePage === "Requested" ? "active" : "unactive"}
@@ -72,8 +82,8 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            {activePage === "Approved" && <Approved />}
-            {activePage === "Under trial" && <UnderTrial />}
+            {activePage === "Approved" && <Approved onShowDetails={showDetailsHandler}/>}
+            {activePage === "In progress" && <UnderTrial />}
             {activePage === "Requested" && <Requested />}
             {activePage === "Refuzed" && <Refuzed />}
         </div>

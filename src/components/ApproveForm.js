@@ -47,7 +47,7 @@ const ApproveForm = ({item,goBackHandler}) => {
                                 type="submit"
                                 className={`w-[105px] py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[var(--dark-color)] cursor-pointer shadow-lg rounded-lg`}
                             >
-                                Edit
+                                Submit
                             </button>
                             <button
                                 onClick={goBackHandler}

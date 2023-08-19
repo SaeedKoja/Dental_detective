@@ -1,7 +1,7 @@
 import React from 'react';
 import CaseBox from './CaseBox';
 
-const Approved = () => {
+const Approved = ({onShowDetails}) => {
    
 
     const data =[
@@ -46,7 +46,7 @@ const Approved = () => {
         <div>
             {data.map((item, index) => {
                 return (
-                    <CaseBox item={item} key={index} page={1}/>
+                    <CaseBox item={item} key={index} page={1} onShowDetails={onShowDetails}/>
             )
             })}
         </div>
