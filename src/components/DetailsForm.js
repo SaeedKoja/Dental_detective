@@ -95,7 +95,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                         <textarea
                             className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                             type="text"
-                            style={{height:"130px",padding:"15px"}}
+                            style={{ height: "130px", padding: "15px" }}
                             value="ddddddddddddddddddd"
                             readOnly
                         />

@@ -1,54 +1,22 @@
 import React from 'react';
 import CaseBox from './CaseBox';
+import UseAxiosGet from '../hooks/useAxiosGet';
+import { API } from '../data/config';
 
 const Approved = ({onShowDetails}) => {
-   
+    const {data} = UseAxiosGet(API.Dentallabs.GET_APPROVED)
 
-    const data =[
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            maxTime:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            maxTime:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            maxTime:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            maxTime:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            maxTime:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-    ]
+    console.log(data?.orders)
+
+  
 
     return (
         <div>
-            {data.map((item, index) => {
+            {/* {data.map((item, index) => {
                 return (
                     <CaseBox item={item} key={index} page={1} onShowDetails={onShowDetails}/>
             )
-            })}
+            })} */}
         </div>
     );
 }

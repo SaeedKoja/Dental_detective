@@ -45,7 +45,7 @@ const ApproveForm = ({item,goBackHandler}) => {
                         <div className="w-[31%] flex justify-between items-center mb-8 mt-5">
                             <button
                                 type="submit"
-                                className={`w-[105px] py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[var(--dark-color)] cursor-pointer shadow-lg rounded-lg`}
+                                className={`py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[var(--dark-color)] cursor-pointer shadow-lg rounded-lg`}
                             >
                                 Submit
                             </button>

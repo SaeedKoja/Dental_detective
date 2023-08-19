@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import user from '../../assets/images/7309681.jpg';
 import email from '../../assets/icons/mail.png';
 import tel from '../../assets/icons/phone-call.png';
+import img from '../../assets/images/photo_2023-08-18_14-04-18.jpg';
 import location from '../../assets/icons/location.png';
 import edit from '../../assets/icons/pencil.png';
 import ProductBox from '../../components/productBox';
@@ -46,7 +47,7 @@ const Portfolio = () => {
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
-      }, []);
+    }, []);
 
     const data = [
         {
@@ -76,17 +77,17 @@ const Portfolio = () => {
         setDel(true);
     };
 
-   const editBackHandler = () => {
-    setEditProfile(false)
-    setFetchAgain(!fetchAgain)
-   }
- 
+    const editBackHandler = () => {
+        setEditProfile(false)
+        setFetchAgain(!fetchAgain)
+    }
+
     const editHandler = () => {
         setEditProfile({
-            location:'damascus - syria',
+            location: 'damascus - syria',
             phone: '0936286430'
         });
-      };
+    };
 
 
     useEffect(() => {
@@ -104,9 +105,11 @@ const Portfolio = () => {
                     goBackHandler={editBackHandler}
                 />
             )}
-            <div className='flex justify-center items-center'>
+            <div className='flex justify-center items-center relative'>
+                {/* <div className='h-[290px] w-[100%] absolute top-0 bg-[var(--border-color)] rounded-2xl'></div> */}
+                {/* <img src={img} className='h-[290px] w-[100%] absolute top-0 object-cover rounded-lg shadow-md' /> */}
                 <div
-                 className='w-[600px] bg-white p-4 relative rounded-lg shadow-md'>
+                    className='w-[600px] bg-white m-4 p-4 relative rounded-lg shadow-md'>
                     <div className='flex items-center'>
                         <img src={user} className='w-[65px] h-[65px] mr-8 rounded-full' />
                         <div>
