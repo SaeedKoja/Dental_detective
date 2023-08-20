@@ -5,43 +5,15 @@ import { useEffect } from 'react';
 import clock from '../../assets/icons/clock.png';
 import { useRef } from 'react';
 import CaseBox from '../../components/CaseBox';
+import { API } from '../../data/config';
+import UseAxiosGet from '../../hooks/useAxiosGet';
 
 const Archive = () => {
     const dispatch = useDispatch();
     const pageRef = useRef(null);
+    const { data: archiveForms } = UseAxiosGet(API.Dentallabs.GET_ARCHIVED)
 
-    const data =[
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-        {
-            type:'type of case',
-            time:'12/8/2023',
-            patient:'Saeed Koja',
-            doctor:'Hamza Ahmad',
-        },
-    ]
+    console.log(archiveForms)
 
     useEffect(() => {
         dispatch(activeAction.replaceActiveState('Archive'))
@@ -86,63 +58,11 @@ const Archive = () => {
                     </div>
                 </div>
             </div>
-            {data.map((item, index) => {
+            {archiveForms && archiveForms.data.map((item, index) => {
                 return (
-                    <CaseBox item={item} page={0}/>
-            )
+                    <CaseBox item={item} key={index} page={0} />
+                )
             })}
-            {/* <div className='relative text-sm'>
-                <div className='form mb-5 flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
-                    <p className='text-center w-[20%]'>type of case</p>
-                    <div className='w-[20%] flex justify-center items-center'>
-                        <img className='w-[20px] mr-2' src={clock}></img>
-                        <p>12/8/2023</p>
-                    </div>
-                    <div className='w-[20%]'>
-                        <p className='mb-2'>patient name</p>
-                        <p>doctor name</p>
-                    </div>
-                    <p className='w-[14%] text-[var(--blue-color)]'>archived</p>
-                </div></div>
-            <div className='relative text-sm'>
-                <div className='form mb-5 flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
-                    <p className='text-center w-[20%]'>type of case</p>
-                    <div className='w-[20%] flex justify-center items-center'>
-                        <img className='w-[20px] mr-2' src={clock}></img>
-                        <p>12/8/2023</p>
-                    </div>
-                    <div className='w-[20%]'>
-                        <p className='mb-2'>patient name</p>
-                        <p>doctor name</p>
-                    </div>
-                    <p className='w-[14%] text-[var(--blue-color)]'>archived</p>
-                </div></div>
-            <div className='relative text-sm'>
-                <div className='form mb-5 flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
-                    <p className='text-center w-[20%]'>type of case</p>
-                    <div className='w-[20%] flex justify-center items-center'>
-                        <img className='w-[20px] mr-2' src={clock}></img>
-                        <p>12/8/2023</p>
-                    </div>
-                    <div className='w-[20%]'>
-                        <p className='mb-2'>patient name</p>
-                        <p>doctor name</p>
-                    </div>
-                    <p className='w-[14%] text-[var(--blue-color)]'>archived</p>
-                </div></div>
-            <div className='relative text-sm'>
-                <div className='form mb-5 flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
-                    <p className='text-center w-[20%]'>type of case</p>
-                    <div className='w-[20%] flex justify-center items-center'>
-                        <img className='w-[20px] mr-2' src={clock}></img>
-                        <p>12/8/2023</p>
-                    </div>
-                    <div className='w-[20%]'>
-                        <p className='mb-2'>patient name</p>
-                        <p>doctor name</p>
-                    </div>
-                    <p className='w-[14%] text-[var(--blue-color)]'>archived</p>
-                </div></div> */}
         </div>
     );
 }

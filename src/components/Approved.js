@@ -2,21 +2,29 @@ import React from 'react';
 import CaseBox from './CaseBox';
 import UseAxiosGet from '../hooks/useAxiosGet';
 import { API } from '../data/config';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-const Approved = ({onShowDetails}) => {
-    const {data} = UseAxiosGet(API.Dentallabs.GET_APPROVED)
+const Approved = ({ onShowDetails }) => {
+    const { data } = UseAxiosGet(API.Dentallabs.GET_APPROVED)
+    const [approvedForms, setApprovedForms] = useState([])
 
-    console.log(data?.orders)
+    useEffect(() => {
+        if (!data) return
+        setApprovedForms(data.orders)
+    }, [data])
 
-  
+    const completeHandler = (id) => {
+        approvedForms.filter((array) => array.id !== id)
+    }
 
     return (
         <div>
-            {/* {data.map((item, index) => {
+            {approvedForms && approvedForms.map((item, index) => {
                 return (
-                    <CaseBox item={item} key={index} page={1} onShowDetails={onShowDetails}/>
-            )
-            })} */}
+                    <CaseBox onComplete={completeHandler} item={item} key={index} page={1} onShowDetails={onShowDetails} />
+                )
+            })}
         </div>
     );
 }

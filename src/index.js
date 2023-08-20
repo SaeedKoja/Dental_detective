@@ -7,10 +7,6 @@ import store from "./store/index";
 import "./global/main.css"
 import "./index.css"
 
-// import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-
-//import  "./Login Component/login.scss"
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

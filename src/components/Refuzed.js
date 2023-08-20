@@ -2,47 +2,14 @@ import React from 'react';
 import CaseBox from './CaseBox';
 import NotesForm from './NotesForm';
 import { useState } from 'react';
+import { API } from '../data/config';
+import UseAxiosGet from '../hooks/useAxiosGet';
 
 const Refuzed = () => {
     const [showNotes, setShowNotes] = useState(false);
+    const { data:refuzedForms } = UseAxiosGet(API.Dentallabs.GET_REFUZED)
 
-    const data = [
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-    ]
+    console.log(refuzedForms)
 
     const showNotesHandler = (item) => {
         setShowNotes(item);
@@ -56,7 +23,7 @@ const Refuzed = () => {
                     goBackHandler={()=>setShowNotes(false)}
                 />
             )}
-              {data.map((item, index) => {
+              {refuzedForms && refuzedForms.data.map((item, index) => {
                 return (
                     <CaseBox item={item} onShowNotes={showNotesHandler} key={index} page={4} />
                 )

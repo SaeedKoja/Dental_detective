@@ -11,10 +11,10 @@ const NotesForm = ({ item, goBackHandler }) => {
                     <div className="w-[100%] relative flex justify-between items-center">
                         <div className="child">
                             <textarea
-                                className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg px-4 w-[49%]"
+                                className="subchild border-none outline-none rounded-r-lg text-[var(--dark-color)] rounded-l-lg px-4 w-[49%]"
                                 style={{height:"150px",padding:"15px 10px"}}
                                 type="text"
-                                value={item}
+                                value={item.notes}
                                 readOnly
                             />
                             <label className="top-top">Notes</label>

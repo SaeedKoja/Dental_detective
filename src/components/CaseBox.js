@@ -1,29 +1,45 @@
 import React from 'react';
 import clock from '../assets/icons/clock.png';
 import details from '../assets/icons/right-arrow.png';
+import axios from 'axios';
+import { API } from '../data/config';
+import swal from 'sweetalert';
 
 const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onShowDetails }) => {
+
+    const completeHandler = () => {
+        // axios.post(`${API.Dentallabs.POST_COMPLETE}/${item.id}`).then((res) => {
+        //     console.log(res)
+            swal({
+                title: "success",
+                timer: 3000,
+                icon: "success"
+            });
+        //     onComplete(item.id)
+        // }).catch((error) => { console.log(error) })
+    }
+
     return (
         <div className='relative text-sm '>
             <div className='form mb-5 h-[130px] bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
-                <p className='text-center w-[20%]'>{item.type}</p>
+                <p className='text-center w-[20%]'>{item.material_type.name}</p>
                 <div className='w-[20%] flex justify-center items-center'>
                     <img className='w-[20px] mr-2' src={clock}></img>
                     <div>
-                        <p>{item.time}</p>
-                        {page === 1 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
+                        {/* <p>{item.time}</p> */}
+                        {page === 1 && <p className='text-[var(--border-color)]'>{item.created_at}</p>}
                         {page === 2 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                         {page === 3 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                         {page === 4 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                     </div>
                 </div>
                 <div className='w-[20%]'>
-                    <p className='mb-2'>{item.doctor}</p>
-                    <p>{item.patient}</p>
+                    <p className='mb-2'>{item.dentist}</p>
+                    <p>{item.patient.name}</p>
                 </div>
                 <div className='w-[20%] flex justify-between items-center'>
                     {page === 0 && <p className='text-[#C18CB3]'>archived</p>}
-                    {page === 1 && <button className={` py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[#C18CB3] cursor-pointer rounded-xl`}>Complete</button>}
+                    {page === 1 && <button onClick={completeHandler} className={` py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[#C18CB3] cursor-pointer rounded-xl`}>Complete</button>}
                     {page === 2 && <p className='text-[#C18CB3] text-md'>sended</p>}
                     {page === 3 && <div className="flex justify-end items-center">
                         <div className="flex flex-col justify-between items-center">
@@ -50,7 +66,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
                                 show notes
                             </button>
                             <button
-                                onClick={onComplete}
+                                onClick={completeHandler}
                                 className="w-[118px] border border-[#C18CB3] py-[7px] outline-none cursor-pointer font-bold rounded-lg text-[#C18CB3] "
                             >
                                 complete
