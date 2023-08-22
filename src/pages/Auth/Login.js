@@ -17,33 +17,28 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(API.auth.LOGIN, { email, password })
+      .post(API.auth.LOGIN, { email: email, password: password })
       .then((res) => {
-        Cookies.set("user", JSON.stringify(res.data.data.user), {
+        Cookies.set("user", JSON.stringify(res.data.user), {
           path: "/",
           expires: 10
         });
-        Cookies.set("accessToken", res.data.data.access, {
+        Cookies.set("id", res.data.user.id, {
           path: "/",
           expires: 10
         });
-        Cookies.set("refeshToken", res.data.data.refresh, {
+        Cookies.set("token", res.data.token, {
           path: "/",
           expires: 10
         });
         swal({
-          title: `${res.data.message}`,
+          title: `success`,
           timer: 3000,
           icon: "success"
         });
         setTimeout(() => {
-          if (!res.data.data.user.email_verified) nav("/CodeVerification");
-          else if (!res.data.data.user.phone_number)
-            nav("/CompleteProfileInfo");
-          else {
-            nav("/Aafia/Home");
-            dispatch(authAction.loginHandler(true));
-          }
+          dispatch(authAction.loginHandler(true));
+          nav("/Dental/Home");
         }, [3040]);
       })
       .catch((err) => {
@@ -58,7 +53,7 @@ const Login = () => {
   return (
     <div>
       <div
-      style={{ backgroundImage: `url(${require("../../assets/images/flat-lay-health-still-life-arrangement-with-copy-space.jpg")})` }}
+        style={{ backgroundImage: `url(${require("../../assets/images/flat-lay-health-still-life-arrangement-with-copy-space.jpg")})` }}
         className='text-[var(--ligth-color)] relative flex items-center w-[100%] h-[100vh] bg-no-repeat bg-cover'
       >
         <div className="z-40 w-[370px] h-[420px] rounded-2xl bg-[var(--blue-color)] absolute left-[60%] p-4 shadow-lg">
@@ -140,9 +135,9 @@ const Login = () => {
             </div>
             <p
               className="text-center mt-3 cursor-pointer"
-              onClick={() => {
-                nav("/ForgotPassword");
-              }}
+            // onClick={() => {
+            //   nav("/ForgotPassword");
+            // }}
             >
               Forgot Password ?
             </p>
@@ -152,12 +147,12 @@ const Login = () => {
             >
               Login
             </button>
-            <p className="text-center">
+            {/* <p className="text-center">
               Don't have an account?
               <NavLink to="/Register" className="text-[var(--dark-color)]">
                 Sign up
               </NavLink>
-            </p>
+            </p> */}
           </form>
         </div>
       </div>

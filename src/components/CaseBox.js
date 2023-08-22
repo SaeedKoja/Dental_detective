@@ -8,26 +8,27 @@ import swal from 'sweetalert';
 const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onShowDetails }) => {
 
     const completeHandler = () => {
-        // axios.post(`${API.Dentallabs.POST_COMPLETE}/${item.id}`).then((res) => {
-        //     console.log(res)
+        axios.post(`${API.Dentallabs.POST_COMPLETE}/${item.id}`).then((res) => {
+            console.log(res)
             swal({
                 title: "success",
                 timer: 3000,
                 icon: "success"
             });
-        //     onComplete(item.id)
-        // }).catch((error) => { console.log(error) })
+            onComplete(item.id)
+        }).catch((error) => { console.log(error) })
     }
-
+    const date = new Date(item.created_at)
+    const createDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     return (
         <div className='relative text-sm '>
             <div className='form mb-5 h-[130px] bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
                 <p className='text-center w-[20%]'>{item.material_type.name}</p>
                 <div className='w-[20%] flex justify-center items-center'>
-                    <img className='w-[20px] mr-2' src={clock}></img>
+                    <img className='w-[20px] mr-2' src={clock} alt=''></img>
                     <div>
                         {/* <p>{item.time}</p> */}
-                        {page === 1 && <p className='text-[var(--border-color)]'>{item.created_at}</p>}
+                        {page === 1 && <p className='text-[var(--border-color)]'>{createDate}</p>}
                         {page === 2 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                         {page === 3 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
                         {page === 4 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
@@ -73,7 +74,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
                             </button>
                         </div>
                     </div>}
-                    <img src={details} onClick={() => onShowDetails(item)} className='w-[25px] cursor-pointer' />
+                    <img src={details} alt='' onClick={() => onShowDetails(item)} className='w-[25px] cursor-pointer' />
                 </div>
             </div></div>
     );

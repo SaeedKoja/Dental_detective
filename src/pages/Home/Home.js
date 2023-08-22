@@ -19,13 +19,13 @@ const Home = () => {
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
-      }, []);
+    }, []);
 
     useEffect(() => {
         dispatch(activeAction.replaceActiveState('Home'))
     }, [])
 
-    const searchHandler = (e) => {}
+    const searchHandler = (e) => { }
 
     const showDetailsHandler = (item) => {
         setShowDetails(item)
@@ -36,7 +36,7 @@ const Home = () => {
             {showDetails && (
                 <DetailsForm
                     item={showDetails}
-                    goBackHandler={()=>setShowDetails(false)}
+                    goBackHandler={() => setShowDetails(false)}
                 />
             )}
             <div className="home w-[100%] m-auto h-[40px] rounded-full bg-[var(--blue-color)] border border-[var(--blue-color)] mt-4 flex justify-center items-center">
@@ -46,24 +46,28 @@ const Home = () => {
                         onClick={() => setActivePage("Approved")}
                     >
                         Approved
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Approved" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>4</div>
                     </li>
                     <li
                         className={activePage === "In progress" ? "active" : "unactive"}
                         onClick={() => setActivePage("In progress")}
                     >
                         In progress
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "In progress" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>4</div>
                     </li>
                     <li
                         className={activePage === "Requested" ? "active" : "unactive"}
                         onClick={() => setActivePage("Requested")}
                     >
                         Requested
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Requested" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>4</div>
                     </li>
                     <li
                         className={activePage === "Refuzed" ? "active" : "unactive"}
                         onClick={() => setActivePage("Refuzed")}
                     >
                         Refuzed
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Refuzed" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>4</div>
                     </li>
                 </ul>
             </div>
@@ -82,10 +86,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            {activePage === "Approved" && <Approved onShowDetails={showDetailsHandler}/>}
-            {activePage === "In progress" && <UnderTrial />}
-            {activePage === "Requested" && <Requested />}
-            {activePage === "Refuzed" && <Refuzed />}
+            {activePage === "Approved" && <Approved onShowDetails={showDetailsHandler} />}
+            {activePage === "In progress" && <UnderTrial onShowDetails={showDetailsHandler} />}
+            {activePage === "Requested" && <Requested onShowDetails={showDetailsHandler} />}
+            {activePage === "Refuzed" && <Refuzed onShowDetails={showDetailsHandler} />}
         </div>
     );
 }

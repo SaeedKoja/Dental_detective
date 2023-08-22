@@ -13,9 +13,10 @@ const Approved = ({ onShowDetails }) => {
         if (!data) return
         setApprovedForms(data.orders)
     }, [data])
+    console.log(approvedForms)
 
     const completeHandler = (id) => {
-        approvedForms.filter((array) => array.id !== id)
+        setApprovedForms(approvedForms.filter((array) => +array.id !== +id))
     }
 
     return (

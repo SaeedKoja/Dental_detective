@@ -12,7 +12,9 @@ import logout from '../assets/icons/logout.png'
 import { NavLink, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux";
 import { activeAction } from "../store/active-ui";
+import { authAction } from '../store/auth';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 
 const NavBar = () => {
     const nav = useNavigate();
@@ -23,6 +25,14 @@ const NavBar = () => {
     const clickHandler = (page) => {
         dispatch(activeAction.replaceActiveState(page))
         nav(`/Dental/${page}`)
+    }
+
+    const logoutHandler = () => {
+        dispatch(authAction.logoutHandler())
+        Cookies.remove("user");
+        Cookies.remove("id");
+        Cookies.remove("token");
+        nav("/Login");
     }
 
     return (
@@ -39,7 +49,7 @@ const NavBar = () => {
             <hr className="px-4 w-[80%] m-auto mt-6 rounded-full border-[var(--ligth-color)]"></hr>
             <div className='my-6 h-[300px] flex flex-col text-[var(--ligth-color)] justify-between items-start'>
                 <div className='relative w-[100%]'><div onClick={() => clickHandler("Home")} className={`flex items-end pl-7 py-3 w-[100%] cursor-pointer ${activePage === "Home" && "active"}`}>
-                    <img src={home} className='mr-4 w-[25px]'></img>
+                    <img src={home} className='mr-4 w-[25px]' alt=''></img>
                     <p className=''>Home</p>
                 </div></div>
                 <div className='relative w-[100%]'><div onClick={() => clickHandler("Portfolio")} className={`flex items-end pl-7 py-3 w-[100%] cursor-pointer ${activePage === "Portfolio" && "active"}`}>
@@ -64,8 +74,8 @@ const NavBar = () => {
                 </div></div>
             </div>
             <hr className="px-4 w-[80%] m-auto mt-9 rounded-full border-[var(--ligth-color)]"></hr>
-            <div className='px-4 flex justify-start pl-12 items-end mt-5 cursor-pointer'>
-                <img src={logout} className='mr-4 w-[25px]'></img>
+            <div className='px-4 flex justify-start pl-12 items-end mt-5 cursor-pointer' onClick={logoutHandler}>
+                <img src={logout} className='mr-4 w-[25px]' alt=''></img>
                 <p className='text-[var(--ligth-color)]'>log out</p>
             </div>
         </div>

@@ -4,7 +4,7 @@ import ApproveForm from './ApproveForm';
 import { useState } from 'react';
 import DeleteItem from './DeleteItem';
 
-const Requested = () => {
+const Requested = ({onShowDetails}) => {
     const [del, setDel] = useState();
     const [showApproveForm, setshowApproveForm] = useState(false);
     const [fetchAgain, setFetchAgain] = useState(false);
@@ -98,7 +98,7 @@ const Requested = () => {
             )}
             {data.map((item, index) => {
                 return (
-                    <CaseBox item={item} onReject={rejectHandler} onApprove={approveHandler} key={index} page={3} />
+                    <CaseBox item={item} onReject={rejectHandler} onShowDetails={onShowDetails} onApprove={approveHandler} key={index} page={3} />
                 )
             })}
         </div>

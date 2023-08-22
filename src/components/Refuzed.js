@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { API } from '../data/config';
 import UseAxiosGet from '../hooks/useAxiosGet';
 
-const Refuzed = () => {
+const Refuzed = ({onShowDetails}) => {
     const [showNotes, setShowNotes] = useState(false);
     const { data:refuzedForms } = UseAxiosGet(API.Dentallabs.GET_REFUZED)
 
@@ -25,7 +25,7 @@ const Refuzed = () => {
             )}
               {refuzedForms && refuzedForms.data.map((item, index) => {
                 return (
-                    <CaseBox item={item} onShowNotes={showNotesHandler} key={index} page={4} />
+                    <CaseBox item={item} onShowNotes={showNotesHandler} onShowDetails={onShowDetails} key={index} page={4} />
                 )
             })}
         </div>

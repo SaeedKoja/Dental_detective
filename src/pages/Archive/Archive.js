@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { activeAction } from '../../store/active-ui';
 import { useEffect } from 'react';
@@ -7,10 +7,12 @@ import { useRef } from 'react';
 import CaseBox from '../../components/CaseBox';
 import { API } from '../../data/config';
 import UseAxiosGet from '../../hooks/useAxiosGet';
+import DetailsForm from '../../components/DetailsForm';
 
 const Archive = () => {
     const dispatch = useDispatch();
     const pageRef = useRef(null);
+    const [showDetails, setShowDetails] = useState(false)
     const { data: archiveForms } = UseAxiosGet(API.Dentallabs.GET_ARCHIVED)
 
     console.log(archiveForms)
@@ -40,9 +42,19 @@ const Archive = () => {
         //     }
     };
 
+    const showDetailsHandler = (item) => {
+        setShowDetails(item)
+    }
+
 
     return (
         <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
+             {showDetails && (
+                <DetailsForm
+                    item={showDetails}
+                    goBackHandler={() => setShowDetails(false)}
+                />
+            )}
             <div className='mb-16 w-[900px] flex justify-between items-center '>
                 <p className='text-[var(--blak-color)] text-4xl font-bold'>Archived forms</p>
                 <div className="relative">
@@ -60,7 +72,7 @@ const Archive = () => {
             </div>
             {archiveForms && archiveForms.data.map((item, index) => {
                 return (
-                    <CaseBox item={item} key={index} page={0} />
+                    <CaseBox item={item} onShowDetails={showDetailsHandler} key={index} page={0} />
                 )
             })}
         </div>

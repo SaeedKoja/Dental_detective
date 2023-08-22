@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
-// const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
-const token = Cookies.get("accessToken");
+const token = Cookies.get("token");
 
 const initialState = {
   isLogged: !!token
-    // !!token && (user ? user?.phone_number && user?.email_verified : false)
 };
 
 const authSlice = createSlice({
@@ -14,7 +12,7 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {
     loginHandler(state, action) {
-      state.isLogged = action.payload;
+      state.isLogged = true;
     },
     logoutHandler(state, action) {
       state.isLogged = false;

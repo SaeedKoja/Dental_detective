@@ -16,8 +16,8 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                name='price'
-                                value={item.doctor}
+                                name='doctor'
+                                value={item.dentist}
                                 readOnly
                             />
                             <label className="top-top">Doctor name</label>
@@ -26,8 +26,8 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                name='price'
-                                value={item.patient}
+                                name='patient'
+                                value={item.patient.name}
                                 readOnly
                             />
                             <label className="top-top">Patient name</label>
@@ -38,7 +38,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                value={item.type}
+                                value={item.work_type.name}
                                 readOnly
                             />
                             <label className="top-top">Work type</label>
@@ -47,7 +47,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                value={item.gender}
+                                value={item.patient.gender}
                                 readOnly
                             />
                             <label className="top-top">Gender</label>
@@ -56,7 +56,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                value={item.age}
+                                value={item.patient.age}
                                 readOnly
                             />
                             <label className="top-top">Age</label>

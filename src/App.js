@@ -14,32 +14,34 @@ import Complaints from "./pages/Complaints/Complaints";
 import Archive from "./pages/Archive/Archive";
 import Clients from "./pages/Clients/Clients";
 import Portfolio from "./pages/Portfolio/Portfolio";
+import { useSelector } from "react-redux";
 
 
 function App() {
-  const isLoggedIn = true
+  const isLogged = useSelector((state) => state.auth.isLogged)
+  console.log(isLogged)
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<RedirectPage />}></Route>
-        {!isLoggedIn && <Route path="/Login" element={<Login />}></Route>}
-        {!isLoggedIn && <Route path="/Register" element={<Register />}></Route>}
-        {!isLoggedIn && (
+        {!isLogged && <Route path="/Login" element={<Login />}></Route>}
+        {/* {!isLoggedIn && <Route path="/Register" element={<Register />}></Route>} */}
+        {/* {!isLoggedIn && (
           <Route
             path="/CodeVerification"
             element={<CodeVerification />}
           ></Route>
-        )}
-        {isLoggedIn && (
+        )} */}
+        {/* {isLoggedIn && (
           <Route path="/Change_password" element={<ChangePassword />}></Route>
-        )}
-        {!isLoggedIn && (
+        )} */}
+        {/* {!isLoggedIn && (
           <Route path="/Reset_password" element={<ResetPassword />}></Route>
-        )}
-        {!isLoggedIn && (
+        )} */}
+        {/* {!isLoggedIn && (
           <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
-        )}
-        {isLoggedIn && (
+        )} */}
+        {isLogged && (
           <Route path="/Dental" element={<Dental />}>
             <Route path="Home" element={<Home />}></Route>
             <Route path="Portfolio" element={<Portfolio />}></Route>

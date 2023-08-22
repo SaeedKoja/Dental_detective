@@ -4,18 +4,18 @@ import Cookies from "js-cookie";
 
 const RedirectPage = () => {
   // const user = Cookies.get("user") ? JSON.parse(Cookies.get("user")) : null;
-  const token = Cookies.get("accessToken");
+  const id = Cookies.get("id");
   const nav = useNavigate();
 
   useEffect(() => {
-    if (!token) {
+    if (!id) {
       // if (user ? !!user?.phone_number : false) nav("/Aafia/Home");
       nav("/Login");
     } else {
       // if (user ? !user?.email_verified : false) nav("/CodeVerification");
       nav("/Dental/Home");
     }
-  }, [ token]);
+  }, [id]);
 
   return <div></div>;
 };
