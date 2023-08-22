@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CaseBox from './CaseBox';
 import UseAxiosGet from '../hooks/useAxiosGet';
 import { API } from '../data/config';
 
-const UnderTrial = ({onShowDetails}) => {
-    const { data:inProgressForms } = UseAxiosGet(API.Dentallabs.GET_IN_PROGRESS)
+const UnderTrial = ({ onShowDetails, setForms, setFactData, forms }) => {
+    const { data } = UseAxiosGet(API.Dentallabs.GET_IN_PROGRESS)
+
+    useEffect(() => {
+        if (!data) return
+        // setRefuzedForms(data.data)
+        setForms(data.data)
+        setFactData(data.data)
+    }, [data])
+
+    useEffect(() => {
+        setForms([])
+    }, []);
 
     return (
         <div>
-            {inProgressForms && inProgressForms.data.map((item, index) => {
+            {forms && forms.map((item, index) => {
                 return (
-                    <CaseBox item={item} onShowDetails={onShowDetails} key={index} page={2}/>
-            )
+                    <CaseBox item={item} onShowDetails={onShowDetails} key={index} page={2} />
+                )
             })}
         </div>
     );

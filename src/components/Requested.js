@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import CaseBox from './CaseBox';
 import ApproveForm from './ApproveForm';
 import { useState } from 'react';
 import DeleteItem from './DeleteItem';
+import UseAxiosGet from '../hooks/useAxiosGet';
+import { API } from '../data/config';
+import axios from 'axios';
 
-const Requested = ({onShowDetails}) => {
+const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
     const [del, setDel] = useState();
     const [showApproveForm, setshowApproveForm] = useState(false);
     const [fetchAgain, setFetchAgain] = useState(false);
     const [formId, setFormtId] = useState("");
+    // const [requestedForms, setRequestedForms] = useState([])
+
+    const fetchHandler = useCallback(() => {
+        axios
+            .get(API.Dentallabs.GET_REQUESTED
+            )
+            .then((res) => {
+                setForms(res.data.data);
+                setFactData(res.data.data);
+            });
+    }, []);
+
+    useEffect(() => {
+        fetchHandler();
+    }, [fetchHandler, fetchAgain]);
+
+    useEffect(() => {
+        setForms([])
+    }, []);
 
     const confrimHandler = () => {
-        // axios
-        //     .delete(`${API.consultations.CONSULTATIONS}${conId}`, {
-        //         headers: {
-        //             Authorization: "JWT " + Cookies.get("accessToken")
-        //         }
-        //     })
-        //     .then((res) => {
-        //         console.log(res);
-        //         setDel(false);
-        //         setConsultations((prev) => {
-        //             return {
-        //                 ...prev,
-        //                 count: consultations.count - 1,
-        //                 pending_count: isPending
-        //                     ? consultations.pending_count - 1
-        //                     : consultations.pending,
-        //                 data: consultations.data.filter((array) => array.id !== conId)
-        //             };
-        //         });
-        //     });
+        axios
+            .post(`${API.Dentallabs.REJECT_REQUESTED}/${formId}`)
+            .then((res) => {
+                console.log(res);
+                setDel(false);
+                setForms(forms.filter((array) => +array.id !== +formId));
+                setFactData(forms.filter((array) => +array.id !== +formId));
+            });
     };
 
     const rejectHandler = (id) => {
@@ -47,44 +57,6 @@ const Requested = ({onShowDetails}) => {
         setshowApproveForm(item);
     };
 
-    const data = [
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-        {
-            type: 'type of case',
-            time: '12/8/2023',
-            maxTime: '12/8/2023',
-            patient: 'Saeed Koja',
-            doctor: 'Hamza Ahmad',
-        },
-    ]
-
     return (
         <div>
             {del && (
@@ -96,7 +68,7 @@ const Requested = ({onShowDetails}) => {
                     goBackHandler={approveBackHandler}
                 />
             )}
-            {data.map((item, index) => {
+            {forms && forms.map((item, index) => {
                 return (
                     <CaseBox item={item} onReject={rejectHandler} onShowDetails={onShowDetails} onApprove={approveHandler} key={index} page={3} />
                 )

@@ -16,6 +16,8 @@ const Home = () => {
     const pageRef = useRef(null);
     const [activePage, setActivePage] = useState("Approved")
     const [showDetails, setShowDetails] = useState(false)
+    const [forms, setForms] = useState([])
+    const [factData, setFactData] = useState([])
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
@@ -25,7 +27,23 @@ const Home = () => {
         dispatch(activeAction.replaceActiveState('Home'))
     }, [])
 
-    const searchHandler = (e) => { }
+    const searchHandler = (e) => {
+        let searchQuery = e.target.value;
+        let resultSearch = factData?.filter((form) => {
+            return (
+                form.Max_Data.includes(searchQuery) ||
+                form.dentist.name.includes(searchQuery) ||
+                form.patient.name.includes(searchQuery) ||
+                form.status.name.includes(searchQuery)
+            );
+        });
+        if (searchQuery === "") {
+            setForms(factData);
+        } else {
+            console.log(forms)
+            setForms(resultSearch);
+        }
+    };
 
     const showDetailsHandler = (item) => {
         setShowDetails(item)
@@ -86,10 +104,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            {activePage === "Approved" && <Approved onShowDetails={showDetailsHandler} />}
-            {activePage === "In progress" && <UnderTrial onShowDetails={showDetailsHandler} />}
-            {activePage === "Requested" && <Requested onShowDetails={showDetailsHandler} />}
-            {activePage === "Refuzed" && <Refuzed onShowDetails={showDetailsHandler} />}
+            {activePage === "Approved" && <Approved forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "In progress" && <UnderTrial forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "Requested" && <Requested forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "Refuzed" && <Refuzed forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
         </div>
     );
 }

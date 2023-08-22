@@ -17,7 +17,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                                 className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
                                 name='doctor'
-                                value={item.dentist}
+                                value={item.dentist.name}
                                 readOnly
                             />
                             <label className="top-top">Doctor name</label>
@@ -67,7 +67,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                value={item.date}
+                                value={item.Max_Data}
                                 readOnly
                             />
                             <label className="top-top">Max date</label>
@@ -76,19 +76,19 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             <input
                                 className="subchild border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                value={item.color}
+                                value={item.teeth_color.name}
                                 readOnly
                             />
-                            <label className="top-top">Color</label>
+                            <label className="top-top">Teeth color</label>
                         </div>
                         <div className="child">
                             <input
                                 className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                                 type="text"
-                                value={item.toothNum}
+                                value={item.teeth_type.name}
                                 readOnly
                             />
-                            <label className="top-top">Tooth number</label>
+                            <label className="top-top">Teeth type</label>
                         </div>
                     </div>
                     <div className="child">
@@ -96,7 +96,7 @@ const DetailsForm = ({ item, goBackHandler }) => {
                             className="border-none outline-none rounded-r-lg text-gray-700 rounded-l-lg py-[7px] px-4 w-[49%]"
                             type="text"
                             style={{ height: "130px", padding: "15px" }}
-                            value="ddddddddddddddddddd"
+                            value={item.notes}
                             readOnly
                         />
                         <label className="top-top">Extra notes</label>

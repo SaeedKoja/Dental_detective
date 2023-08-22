@@ -19,7 +19,9 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
         }).catch((error) => { console.log(error) })
     }
     const date = new Date(item.created_at)
+    const max = new Date(item.Max_Data)
     const createDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    const maxDate = `${max.getFullYear()}-${max.getMonth() + 1}-${max.getDate()}`;
     return (
         <div className='relative text-sm '>
             <div className='form mb-5 h-[130px] bg-white flex justify-between border-[2px] rounded-l-[18px] rounded-r-[18px] border-[var(--border-color)]  items-center w-[100%] py-5 px-6 text-[var(--dark-color)]'>
@@ -28,15 +30,16 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
                     <img className='w-[20px] mr-2' src={clock} alt=''></img>
                     <div>
                         {/* <p>{item.time}</p> */}
-                        {page === 1 && <p className='text-[var(--border-color)]'>{createDate}</p>}
-                        {page === 2 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
-                        {page === 3 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
-                        {page === 4 && <p className='text-[var(--border-color)]'>{item.maxTime}</p>}
+                        <p className='text-[var(--border-color)]'>{createDate}</p>
+                        {page === 1 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
+                        {page === 2 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
+                        {page === 3 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
+                        {page === 4 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
                     </div>
                 </div>
                 <div className='w-[20%]'>
-                    <p className='mb-2'>{item.dentist}</p>
-                    <p>{item.patient.name}</p>
+                    <p className='mb-2'>Dr. {item.dentist.name}</p>
+                    <p>P. {item.patient.name}</p>
                 </div>
                 <div className='w-[20%] flex justify-between items-center'>
                     {page === 0 && <p className='text-[#C18CB3]'>archived</p>}
@@ -51,7 +54,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
                                 approve
                             </button>
                             <button
-                                onClick={() => onReject(item)}
+                                onClick={() => onReject(item.id)}
                                 className="w-[118px] border border-[#C18CB3] py-[7px] outline-none cursor-pointer font-bold rounded-lg text-[#C18CB3] "
                             >
                                 reject

@@ -1,14 +1,40 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import swal from 'sweetalert';
+import { API } from '../data/config';
 
-const ApproveForm = ({item,goBackHandler}) => {
+const ApproveForm = ({ item, goBackHandler }) => {
     const [price, setPrice] = useState("")
     const [maxDate, setMaxDate] = useState(null)
 
     const submitHandler = (e) => {
         e.preventDefault()
+        const max_Date = maxDate
+            ? `${maxDate.getFullYear()}-${maxDate.getMonth() + 1
+            }-${maxDate.getDate()}`
+            : null;
+        axios
+            .post(`${API.Dentallabs.APPROVE_REQUESTED}/${item.id}`, { price: price, Max_Date: max_Date })
+            .then((res) => {
+                swal({
+                    title: `success`,
+                    timer: 3000,
+                    icon: "success"
+                });
+                setTimeout(() => {
+                    goBackHandler()
+                }, [3040]);
+            })
+            .catch((err) => {
+                swal({
+                    icon: "warning",
+                    timer: 3000,
+                    title: `${err.response.data.message}`
+                });
+            });
     }
     return (
         <div
@@ -37,8 +63,9 @@ const ApproveForm = ({item,goBackHandler}) => {
                                 selected={maxDate}
                                 onChange={(e) => setMaxDate(e)
                                 }
+                                required
                             />
-                            <label className="top-top">Address</label>
+                            <label className="top-top">Max date</label>
                         </div>
                     </div>
                     <div className="flex justify-end items-center">
