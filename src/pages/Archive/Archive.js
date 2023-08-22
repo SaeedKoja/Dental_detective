@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { activeAction } from '../../store/active-ui';
 import { useEffect } from 'react';
-import clock from '../../assets/icons/clock.png';
 import { useRef } from 'react';
 import CaseBox from '../../components/CaseBox';
 import { API } from '../../data/config';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import DetailsForm from '../../components/DetailsForm';
-import { dark } from '@mui/material/styles/createPalette';
 import Cookies from 'js-cookie';
 
 const Archive = () => {

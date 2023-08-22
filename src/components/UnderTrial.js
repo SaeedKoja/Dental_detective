@@ -9,7 +9,6 @@ const UnderTrial = ({ onShowDetails, setForms, setFactData, forms }) => {
 
     useEffect(() => {
         if (!data) return
-        // setRefuzedForms(data.data)
         setForms(data.data)
         setFactData(data.data)
     }, [data])

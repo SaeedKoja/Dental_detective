@@ -9,7 +9,6 @@ import Cookies from 'js-cookie';
 const Refuzed = ({ onShowDetails, setForms ,setFactData ,forms}) => {
     const [showNotes, setShowNotes] = useState(false);
     const { data } = UseAxiosGet(`${API.Dentallabs.GET_REFUZED}/${Cookies.get("id")}`)
-    // const [refuzedForms, setRefuzedForms] = useState([])
 
 
     const showNotesHandler = (item) => {
@@ -18,7 +17,6 @@ const Refuzed = ({ onShowDetails, setForms ,setFactData ,forms}) => {
 
     useEffect(() => {
         if (!data) return
-        // setRefuzedForms(data.data)
         setForms(data.data)
         setFactData(data.data)
     }, [data])

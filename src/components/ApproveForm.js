@@ -36,6 +36,7 @@ const ApproveForm = ({ item, goBackHandler }) => {
                 });
             });
     }
+
     return (
         <div
             style={{ backgroundColor: "rgb(0 0 0 / 40%)" }}

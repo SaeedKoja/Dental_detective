@@ -22,7 +22,6 @@ const Complaints = () => {
 
     useEffect(() => {
         if (!data) return
-        console.log(data)
         setComplaints(data.complaints)
         setFactData(data.complaints)
     }, [data])
@@ -46,7 +45,6 @@ const Complaints = () => {
             });
     };
 
-    console.log(complaints)
 
 
     useEffect(() => {

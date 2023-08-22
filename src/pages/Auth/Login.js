@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API } from "../../data/config";
 import Cookies from "js-cookie";
 import swal from "sweetalert";
@@ -135,9 +135,6 @@ const Login = () => {
             </div>
             <p
               className="text-center mt-3 cursor-pointer"
-            // onClick={() => {
-            //   nav("/ForgotPassword");
-            // }}
             >
               Forgot Password ?
             </p>
@@ -147,12 +144,6 @@ const Login = () => {
             >
               Login
             </button>
-            {/* <p className="text-center">
-              Don't have an account?
-              <NavLink to="/Register" className="text-[var(--dark-color)]">
-                Sign up
-              </NavLink>
-            </p> */}
           </form>
         </div>
       </div>

@@ -3,16 +3,13 @@ import CaseBox from './CaseBox';
 import UseAxiosGet from '../hooks/useAxiosGet';
 import { API } from '../data/config';
 import { useEffect } from 'react';
-import { useState } from 'react';
 import Cookies from 'js-cookie';
 
 const Approved = ({ onShowDetails, setForms, setFactData, forms }) => {
     const { data } = UseAxiosGet(`${API.Dentallabs.GET_APPROVED}/${Cookies.get("id")}`)
-    // const [approvedForms, setApprovedForms] = useState([])
 
     useEffect(() => {
         if (!data) return
-        // setApprovedForms(data.orders)
         setForms(data.orders)
         setFactData(data.orders)
     }, [data])

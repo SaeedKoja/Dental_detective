@@ -9,7 +9,6 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
 
     const completeHandler = () => {
         axios.post(`${API.Dentallabs.POST_COMPLETE}/${item.id}`).then((res) => {
-            console.log(res)
             swal({
                 title: "success",
                 timer: 3000,
@@ -18,6 +17,7 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
             onComplete(item.id)
         }).catch((error) => { console.log(error) })
     }
+
     const date = new Date(item.created_at)
     const max = new Date(item.Max_Data)
     const createDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -29,7 +29,6 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
                 <div className='w-[20%] flex justify-center items-center'>
                     <img className='w-[20px] mr-2' src={clock} alt=''></img>
                     <div>
-                        {/* <p>{item.time}</p> */}
                         <p className='text-[var(--border-color)]'>{createDate}</p>
                         {page === 1 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
                         {page === 2 && <p className='text-[var(--border-color)]'>{maxDate}</p>}

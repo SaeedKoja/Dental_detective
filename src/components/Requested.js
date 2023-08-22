@@ -3,7 +3,6 @@ import CaseBox from './CaseBox';
 import ApproveForm from './ApproveForm';
 import { useState } from 'react';
 import DeleteItem from './DeleteItem';
-import UseAxiosGet from '../hooks/useAxiosGet';
 import { API } from '../data/config';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -13,7 +12,6 @@ const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
     const [showApproveForm, setshowApproveForm] = useState(false);
     const [fetchAgain, setFetchAgain] = useState(false);
     const [formId, setFormtId] = useState("");
-    // const [requestedForms, setRequestedForms] = useState([])
 
     const fetchHandler = useCallback(() => {
         axios

@@ -116,11 +116,9 @@ body::-webkit-scrollbar {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  /* justify-content: center; */
   flex-direction: column;
   margin: 10px 0;
   color: var(--dark-color)
-    /* align-items: center; */
 }
 
 .child input,
@@ -160,6 +158,7 @@ textarea:focus {
   border-radius: 10px;
   color: var(--blue-color);
 }
+
 .imgcontent label {
   width: 100%;
   display: flex;
@@ -173,10 +172,12 @@ textarea:focus {
   margin: 10px 0;
   cursor: pointer;
 }
+
 .imgcontent label box-icon {
   font-size: 20px;
-  margin: 0 10px; 
+  margin: 0 10px;
 }
+
 .imgcontent .place-image {
   position: absolute;
   width: 43px;
@@ -184,12 +185,14 @@ textarea:focus {
   right: 5px;
   height: 43px;
 }
+
 .imgcontent .place-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 5px;
 }
+
 .imgcontent .place-image p {
   font-size: 20px;
   position: absolute;

@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import user from '../../assets/images/7309681.jpg';
 import email from '../../assets/icons/mail.png';
 import tel from '../../assets/icons/phone-call.png';
-import img from '../../assets/images/photo_2023-08-18_14-04-18.jpg';
 import location from '../../assets/icons/location.png';
 import edit from '../../assets/icons/pencil.png';
 import ProductBox from '../../components/productBox';
@@ -13,7 +12,6 @@ import DeleteItem from '../../components/DeleteItem';
 import { useState } from 'react';
 import ProfileForm from '../../components/ProfileForm';
 import { useRef } from 'react';
-import UseAxiosGet from '../../hooks/useAxiosGet';
 import { API } from '../../data/config';
 import axios from 'axios';
 import Cookies from 'js-cookie';
@@ -96,8 +94,6 @@ const Portfolio = () => {
             )}
             <div className='text-[dark-color] w-12 h-12 rounded-full flex justify-center items-center text-3xl bg-[var(--border-color)] cursor-pointer fixed bottom-20 right-20' onClick={addCaseHandler}>+</div>
             <div className='flex justify-center items-center relative'>
-                {/* <div className='h-[290px] w-[100%] absolute top-0 bg-[var(--border-color)] rounded-2xl'></div> */}
-                {/* <img src={img} className='h-[290px] w-[100%] absolute top-0 object-cover rounded-lg shadow-md' /> */}
                 <div
                     className='w-[600px] bg-white m-4 p-4 relative rounded-lg shadow-md'>
                     <div className='flex items-center'>
@@ -149,8 +145,6 @@ const Portfolio = () => {
                         <img src={edit} className='w-[30px]' alt='' />
                     </div>
                 </div>
-                {/* <img src={img} className='h-[242px] rounded-lg shadow-md' /> */}
-                {/* <img src={user} className='w-[20%]' /> */}
             </div>
             <div className='mt-12'>
                 <div className='flex justify-evenly items-center mb-12'>

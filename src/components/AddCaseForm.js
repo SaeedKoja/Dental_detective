@@ -37,7 +37,6 @@ const AddCaseForm = ({ goBackHandler }) => {
     }
 
     const onImageChange = (event) => {
-        // const { files } = event.target;
         setImageView(URL.createObjectURL(event.target.files[0]));
         console.log(event.target.files[0])
         setImage(event.target.files[0]);
