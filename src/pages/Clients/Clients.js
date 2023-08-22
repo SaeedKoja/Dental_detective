@@ -6,48 +6,28 @@ import { useState } from 'react';
 import DeleteItem from '../../components/DeleteItem';
 import ClientBox from '../../components/ClientBox';
 import { useRef } from 'react';
+import UseAxiosGet from '../../hooks/useAxiosGet';
+import { API } from '../../data/config';
 
 const Clients = () => {
     const dispatch = useDispatch();
     const [del, setDel] = useState();
     const pageRef = useRef(null);
     const [clientId, setClientId] = useState("");
-    const data = [
-        {
-            name:'Fadi Awad',
-            email:'fadidoctor@gmail.com',
-            location:'damascus - syria',
-            phone: '0936286430'
-        },
-        {
-            name:'Saeed Koja',
-            email:'saeedkoja@gmail.com',
-            location:'homs - syria',
-            phone: '0936284530'
-        },
-        {
-            name:'Ahmad Kurdy',
-            email:'ahmaddoctor@gmail.com',
-            location:'damascus - syria',
-            phone: '0936286430'
-        },
-        {
-            name:'Fadi Awad',
-            email:'fadidoctor@gmail.com',
-            location:'damascus - syria',
-            phone: '0936286430'
-        },
-        {
-            name:'Fadi Awad',
-            email:'fadidoctor@gmail.com',
-            location:'damascus - syria',
-            phone: '0936286430'
-        },
-    ]
+    const [dentist, setDentist] = useState([])
+    const [factData, setFactData] = useState([])
+    const { data } = UseAxiosGet(API.Dentallabs.GET_DENTIST)
+
+    useEffect(() => {
+        if (!data) return
+        console.log(data)
+        setDentist(data.dentists)
+        setFactData(data.dentists)
+    }, [data])
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
-      }, []);
+    }, []);
 
     const deleteClientHandler = (id) => {
         setClientId(id);
@@ -116,9 +96,9 @@ const Clients = () => {
                     maxWidth: "100%",
                 }}
             >
-                {data.map((doctor,index)=>{
+                {dentist.map((doctor, index) => {
                     return (
-                        <ClientBox doctor={doctor} key={index} onDelete={deleteClientHandler}/>
+                        <ClientBox doctor={doctor} key={index} onDelete={deleteClientHandler} />
                     )
                 })}
                 {/* <div className='relative'>

@@ -6,54 +6,25 @@ import { useState } from 'react';
 import DeleteItem from '../../components/DeleteItem';
 import ClientBox from '../../components/ClientBox';
 import { useRef } from 'react';
+import UseAxiosGet from '../../hooks/useAxiosGet';
+import { API } from '../../data/config';
+import axios from 'axios';
 
 const Complaints = () => {
     const dispatch = useDispatch();
     const [del, setDel] = useState();
     const pageRef = useRef(null);
     const [clientId, setClientId] = useState("");
-    const data = [
-        {
-            name: 'Fadi Awad',
-            email: 'fadidoctor@gmail.com',
-            location: 'damascus - syria',
-            phone: '0936286430',
-            status: 'complaint',
-            description: '70% of the composition of our body is water. It’s an essential element to keep the body healthy because it cleans the body',
-        },
-        {
-            name: 'Saeed Koja',
-            email: 'saeedkoja@gmail.com',
-            location: 'homs - syria',
-            phone: '0936284530',
-            status: 'complaint',
-            description: '70% of the composition of our body is water. It’s an essential element to keep the body healthy because it cleans the body',
-        },
-        {
-            name: 'Ahmad Kurdy',
-            email: 'ahmaddoctor@gmail.com',
-            location: 'damascus - syria',
-            phone: '0936286430',
-            status: 'complaint',
-            description: '70% of the composition of our body is water. It’s an essential element to keep the body healthy because it cleans the body',
-        },
-        {
-            name: 'Fadi Awad',
-            email: 'fadidoctor@gmail.com',
-            location: 'damascus - syria',
-            phone: '0936286430',
-            status: 'complaint',
-            description: '70% of the composition of our body is water. It’s an essential element to keep the body healthy because it cleans the body',
-        },
-        {
-            name: 'Fadi Awad',
-            email: 'fadidoctor@gmail.com',
-            location: 'damascus - syria',
-            phone: '0936286430',
-            status: 'complaint',
-            description: '70% of the composition of our body is water. It’s an essential element to keep the body healthy because it cleans the body',
-        },
-    ]
+    const [complaints, setComplaints] = useState([])
+    const [factData, setFactData] = useState([])
+    const { data } = UseAxiosGet(API.Dentallabs.GET_COMPLAINTS)
+
+    useEffect(() => {
+        if (!data) return
+        console.log(data)
+        setComplaints(data.complaints)
+        setFactData(data.complaints)
+    }, [data])
 
     const deleteClientHandler = (id) => {
         setClientId(id);
@@ -62,29 +33,17 @@ const Complaints = () => {
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
-      }, []);
+    }, []);
 
     const confrimHandler = () => {
-        // axios
-        //     .delete(`${API.consultations.CONSULTATIONS}${conId}`, {
-        //         headers: {
-        //             Authorization: "JWT " + Cookies.get("accessToken")
-        //         }
-        //     })
-        //     .then((res) => {
-        //         console.log(res);
-        //         setDel(false);
-        //         setConsultations((prev) => {
-        //             return {
-        //                 ...prev,
-        //                 count: consultations.count - 1,
-        //                 pending_count: isPending
-        //                     ? consultations.pending_count - 1
-        //                     : consultations.pending,
-        //                 data: consultations.data.filter((array) => array.id !== conId)
-        //             };
-        //         });
-        //     });
+        axios
+            .delete(`${API.Dentallabs.DELETE_COMPLAINTS}/${clientId}`)
+            .then((res) => {
+                console.log(res);
+                setDel(false);
+                setComplaints(complaints.filter((array) => +array.id !== +clientId));
+                setFactData(complaints.filter((array) => +array.id !== +clientId));
+            });
     };
 
 
@@ -118,15 +77,15 @@ const Complaints = () => {
                 className="mx-20"
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
                     gap: "30px",
                     margin: "auto",
                     maxWidth: "100%",
                 }}
             >
-                {data.map((doctor, index) => {
+                {complaints.map((item, index) => {
                     return (
-                        <ClientBox page='complaints' doctor={doctor} key={index} onDelete={deleteClientHandler} />
+                        <ClientBox page='complaints' item={item} key={index} onDelete={deleteClientHandler} />
                     )
                 })}
             </div>
