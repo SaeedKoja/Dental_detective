@@ -39,7 +39,6 @@ const Complaints = () => {
         axios
             .delete(`${API.Dentallabs.DELETE_COMPLAINTS}/${clientId}`)
             .then((res) => {
-                console.log(res);
                 setDel(false);
                 setComplaints(complaints.filter((array) => +array.id !== +clientId));
                 setFactData(complaints.filter((array) => +array.id !== +clientId));
@@ -51,7 +50,22 @@ const Complaints = () => {
         dispatch(activeAction.replaceActiveState('Complaints'))
     }, [])
 
-    const searchHandler = (e) => { }
+    const searchHandler = (e) => {
+        let searchQuery = e.target.value;
+        let resultSearch = factData?.filter((complaint) => {
+            return (
+                complaint.dentist.name.includes(searchQuery) ||
+                complaint.dentist.email.includes(searchQuery) ||
+                complaint.dentist.phone.includes(searchQuery) ||
+                complaint.complaint.includes(searchQuery)
+            );
+        });
+        if (searchQuery === "") {
+            setComplaints(factData);
+        } else {
+            setComplaints(resultSearch);
+        }
+    };
 
     return (
         <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
