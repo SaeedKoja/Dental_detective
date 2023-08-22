@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import CaseBox from './CaseBox';
 import UseAxiosGet from '../hooks/useAxiosGet';
 import { API } from '../data/config';
+import Cookies from 'js-cookie';
 
 const UnderTrial = ({ onShowDetails, setForms, setFactData, forms }) => {
-    const { data } = UseAxiosGet(API.Dentallabs.GET_IN_PROGRESS)
+    const { data } = UseAxiosGet(`${API.Dentallabs.GET_IN_PROGRESS}/${Cookies.get("id")}`)
 
     useEffect(() => {
         if (!data) return

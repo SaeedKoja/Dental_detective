@@ -4,6 +4,10 @@ import { activeAction } from '../../store/active-ui';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
+import axios from 'axios';
+import { API } from '../../data/config';
+import Cookies from 'js-cookie';
+import swal from 'sweetalert';
 
 const SendComplaints = () => {
     const dispatch = useDispatch();
@@ -20,6 +24,23 @@ const SendComplaints = () => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        axios
+            .post(`${API.Dentallabs.SEND_COMPLAINT}/${Cookies.get("id")}`, { complaint: message })
+            .then((res) => {
+                swal({
+                    title: `success`,
+                    timer: 3000,
+                    icon: "success"
+                });
+                setMessage("")
+            })
+            .catch((err) => {
+                swal({
+                    icon: "warning",
+                    timer: 3000,
+                    title: `${err.response.data.message}`
+                });
+            });
     }
 
     return (

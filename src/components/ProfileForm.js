@@ -1,5 +1,9 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
+import { API } from '../data/config';
+import swal from 'sweetalert';
+import Cookies from 'js-cookie';
 
 const ProfileForm = ({ goBackHandler, profileData }) => {
     const [phone, setPhone] = useState(profileData.phone)
@@ -7,6 +11,25 @@ const ProfileForm = ({ goBackHandler, profileData }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        axios
+            .post(`${API.Dentallabs.EDIT_PORTFOLIO}/${Cookies.get("id")}`, { phone: phone, city: location })
+            .then((res) => {
+                swal({
+                    title: `success`,
+                    timer: 3000,
+                    icon: "success"
+                });
+                setTimeout(() => {
+                    goBackHandler()
+                }, [3040]);
+            })
+            .catch((err) => {
+                swal({
+                    icon: "warning",
+                    timer: 3000,
+                    title: `${err.response.data.message}`
+                });
+            });
     }
     return (
         <div

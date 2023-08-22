@@ -11,6 +11,7 @@ import { useRef } from 'react';
 import DetailsForm from '../../components/DetailsForm';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import { API } from '../../data/config';
+import Cookies from 'js-cookie';
 
 
 const Home = () => {
@@ -20,11 +21,11 @@ const Home = () => {
     const [showDetails, setShowDetails] = useState(false)
     const [forms, setForms] = useState([])
     const [factData, setFactData] = useState([])
-    const { data: countRequested } = UseAxiosGet(API.Dentallabs.GET_COUNT_IN_PROGRESS)
-    const { data: countInProgress } = UseAxiosGet(API.Dentallabs.GET_COUNT_IN_PROGRESS)
-    const { data: countApproved } = UseAxiosGet(API.Dentallabs.GET_COUNT_APPROVED)
-    const { data: countRefuzed } = UseAxiosGet(API.Dentallabs.GET_COUNT_REFUZED)
-
+    const { data: countRequested } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_REQUESTED}/${Cookies.get("id")}`)
+    const { data: countInProgress } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_IN_PROGRESS}/${Cookies.get("id")}`)
+    const { data: countApproved } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_APPROVED}/${Cookies.get("id")}`)
+    const { data: countRefuzed } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_REFUZED}/${Cookies.get("id")}`)
+    
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
     }, []);
@@ -51,7 +52,6 @@ const Home = () => {
         }
     };
 
-    console.log(countApproved)
 
     const showDetailsHandler = (item) => {
         setShowDetails(item)
@@ -72,28 +72,28 @@ const Home = () => {
                         onClick={() => setActivePage("Approved")}
                     >
                         Approved
-                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Approved" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countApproved.count}</div>
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Approved" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countApproved ? countApproved.count : 0}</div>
                     </li>
                     <li
                         className={activePage === "In progress" ? "active" : "unactive"}
                         onClick={() => setActivePage("In progress")}
                     >
                         In progress
-                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "In progress" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countInProgress.count}</div>
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "In progress" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countInProgress ? countInProgress.count : 0}</div>
                     </li>
                     <li
                         className={activePage === "Requested" ? "active" : "unactive"}
                         onClick={() => setActivePage("Requested")}
                     >
                         Requested
-                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Requested" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countRequested.count}</div>
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Requested" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countRequested ? countRequested.count : 0}</div>
                     </li>
                     <li
                         className={activePage === "Refuzed" ? "active" : "unactive"}
                         onClick={() => setActivePage("Refuzed")}
                     >
                         Refuzed
-                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Refuzed" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countRefuzed.count}</div>
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Refuzed" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countRefuzed ? countRefuzed.count : 0}</div>
                     </li>
                 </ul>
             </div>

@@ -9,6 +9,7 @@ import { useRef } from 'react';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import { API } from '../../data/config';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Complaints = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Complaints = () => {
     const [clientId, setClientId] = useState("");
     const [complaints, setComplaints] = useState([])
     const [factData, setFactData] = useState([])
-    const { data } = UseAxiosGet(API.Dentallabs.GET_COMPLAINTS)
+    const { data } = UseAxiosGet(`${API.Dentallabs.GET_COMPLAINTS}/${Cookies.get("id")}`)
 
     useEffect(() => {
         if (!data) return
@@ -44,6 +45,8 @@ const Complaints = () => {
                 setFactData(complaints.filter((array) => +array.id !== +clientId));
             });
     };
+
+    console.log(complaints)
 
 
     useEffect(() => {

@@ -155,3 +155,45 @@ textarea:focus {
   padding: 0 10px;
   background-color: var(--background-color);
 }
+
+.imgcontent {
+  border-radius: 10px;
+  color: var(--blue-color);
+}
+.imgcontent label {
+  width: 100%;
+  display: flex;
+  font-size: 15px;
+  align-items: center;
+  height: 45px;
+  position: absolute;
+  top: -23px;
+  border: 1px solid var(--blue-color);
+  border-radius: 7px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+.imgcontent label box-icon {
+  font-size: 20px;
+  margin: 0 10px; 
+}
+.imgcontent .place-image {
+  position: absolute;
+  width: 43px;
+  top: -12px;
+  right: 5px;
+  height: 43px;
+}
+.imgcontent .place-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.imgcontent .place-image p {
+  font-size: 20px;
+  position: absolute;
+  top: -8px;
+  color: var(--border-color);
+  right: 4px;
+}

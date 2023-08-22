@@ -7,13 +7,14 @@ import ClientBox from '../../components/ClientBox';
 import { useRef } from 'react';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import { API } from '../../data/config';
+import Cookies from 'js-cookie';
 
 const Clients = () => {
     const dispatch = useDispatch();
     const pageRef = useRef(null);
     const [dentists, setDentists] = useState([])
     const [factData, setFactData] = useState([])
-    const { data } = UseAxiosGet(API.Dentallabs.GET_DENTIST)
+    const { data } = UseAxiosGet(`${API.Dentallabs.GET_DENTIST}/${Cookies.get("id")}`)
 
     useEffect(() => {
         if (!data) return

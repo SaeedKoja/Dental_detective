@@ -17,7 +17,7 @@ const ClientBox = ({ item, onDelete, page = 'clients' }) => {
                 </div>
                     <div className='flex items-center'>
                         <img className='w-[20px] mr-3' src={tel} alt=''></img>
-                        <p className='text-[var(--dark-color)] font-light'>{page === 'complaints' ? item.dentist.phone : item.phone}</p>
+                        <p className='text-[var(--dark-color)] font-light'>{page === 'complaints' ? item.dentist.addresses[0]?.city : item.addresses[0]?.city}</p>
                     </div></div>
                 {page === 'complaints' && <div className='mt-5 flex flex-col items-center'>
                     <p className='mb-2 text-lg font-semibold text-[var(--dark-color)]'>Complaint</p>

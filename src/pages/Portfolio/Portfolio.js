@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from "react-redux";
 import { activeAction } from '../../store/active-ui';
 import { useEffect } from 'react';
@@ -13,6 +13,11 @@ import DeleteItem from '../../components/DeleteItem';
 import { useState } from 'react';
 import ProfileForm from '../../components/ProfileForm';
 import { useRef } from 'react';
+import UseAxiosGet from '../../hooks/useAxiosGet';
+import { API } from '../../data/config';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import AddCaseForm from '../../components/AddCaseForm';
 
 const Portfolio = () => {
     const dispatch = useDispatch();
@@ -21,56 +26,33 @@ const Portfolio = () => {
     const [editProfile, setEditProfile] = useState();
     const [fetchAgain, setFetchAgain] = useState(false);
     const [clientId, setClientId] = useState("");
+    const [showAddForm, setShowAddForm] = useState(false);
+    const [portfolio, setPortfolio] = useState("")
+    const [cases, setCases] = useState([])
+    const [address, setAddress] = useState("")
+
+
+    const fetchHandler = useCallback(() => {
+        axios
+            .get(`${API.Dentallabs.GET_PORTFOLIO}/${Cookies.get("id")}`)
+            .then((res) => {
+                console.log(res.data)
+                setPortfolio(res.data.dentallab)
+                setCases(res.data.dentallab.images)
+                if (res.data.dentallab.addresses.length !== 0) setAddress(res.data.dentallab.addresses[0].city)
+            });
+    }, []);
+
+    useEffect(() => {
+        fetchHandler();
+    }, [fetchHandler, fetchAgain]);
 
     const confrimHandler = () => {
-        // axios
-        //     .delete(`${API.consultations.CONSULTATIONS}${conId}`, {
-        //         headers: {
-        //             Authorization: "JWT " + Cookies.get("accessToken")
-        //         }
-        //     })
-        //     .then((res) => {
-        //         console.log(res);
-        //         setDel(false);
-        //         setConsultations((prev) => {
-        //             return {
-        //                 ...prev,
-        //                 count: consultations.count - 1,
-        //                 pending_count: isPending
-        //                     ? consultations.pending_count - 1
-        //                     : consultations.pending,
-        //                 data: consultations.data.filter((array) => array.id !== conId)
-        //             };
-        //         });
-        //     });
     };
 
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
     }, []);
-
-    const data = [
-        {
-            kind: 'Kind of case',
-            photo: user,
-        },
-        {
-            kind: 'Kind of case',
-            photo: user,
-        },
-        {
-            kind: 'Kind of case',
-            photo: user,
-        },
-        {
-            kind: 'Kind of case',
-            photo: user,
-        },
-        {
-            kind: 'Kind of case',
-            photo: user,
-        },
-    ]
 
     const deleteClientHandler = (id) => {
         setClientId(id);
@@ -84,10 +66,14 @@ const Portfolio = () => {
 
     const editHandler = () => {
         setEditProfile({
-            location: 'damascus - syria',
-            phone: '0936286430'
+            phone: portfolio?.phone,
+            location: address
         });
     };
+
+    const addCaseHandler = () => {
+        setShowAddForm(true)
+    }
 
 
     useEffect(() => {
@@ -99,21 +85,25 @@ const Portfolio = () => {
             {del && (
                 <DeleteItem onConfrim={confrimHandler} onBack={() => setDel(false)} />
             )}
+            {showAddForm && (
+                <AddCaseForm goBackHandler={() => setShowAddForm(false)} />
+            )}
             {editProfile && (
                 <ProfileForm
                     profileData={editProfile}
                     goBackHandler={editBackHandler}
                 />
             )}
+            <div className='text-[dark-color] w-12 h-12 rounded-full flex justify-center items-center text-3xl bg-[var(--border-color)] cursor-pointer fixed bottom-20 right-20' onClick={addCaseHandler}>+</div>
             <div className='flex justify-center items-center relative'>
                 {/* <div className='h-[290px] w-[100%] absolute top-0 bg-[var(--border-color)] rounded-2xl'></div> */}
                 {/* <img src={img} className='h-[290px] w-[100%] absolute top-0 object-cover rounded-lg shadow-md' /> */}
                 <div
                     className='w-[600px] bg-white m-4 p-4 relative rounded-lg shadow-md'>
                     <div className='flex items-center'>
-                        <img src={user} className='w-[65px] h-[65px] mr-8 rounded-full' />
+                        <img src={user} className='w-[65px] h-[65px] mr-8 rounded-full' alt='' />
                         <div>
-                            <p className='text-2xl mb-2 font-bold'>Saeed Koja</p>
+                            <p className='text-2xl mb-2 font-bold'>{portfolio?.name}</p>
                             <div className="rate flex">
                                 <box-icon
                                     type="solid"
@@ -144,19 +134,19 @@ const Portfolio = () => {
                         </div>
                     </div>
                     <div className='flex items-center mt-8'>
-                        <img src={email} className='w-[25px] mr-3' />
-                        <p className='font-light text-lg'>labratoryemail@gmail.com</p>
+                        <img src={email} className='w-[25px] mr-3' alt='' />
+                        <p className='font-light text-lg'>{portfolio?.email}</p>
                     </div>
                     <div className='flex items-center mt-4'>
-                        <img src={tel} className='w-[25px] mr-3' />
-                        <p className='font-light text-lg'>0936286430</p>
+                        <img src={tel} className='w-[25px] mr-3' alt='' />
+                        <p className='font-light text-lg'>{portfolio?.phone}</p>
                     </div>
                     <div className='flex items-center mt-4'>
-                        <img src={location} className='w-[25px] mr-3' />
-                        <p className='font-light text-lg'>damascus - syria</p>
+                        <img src={location} className='w-[25px] mr-3' alt='' />
+                        <p className='font-light text-lg'>{address}</p>
                     </div>
                     <div onClick={editHandler} className='w-[50px] flex justify-center rounded-2xl border-[1px] border-[var(--dark-color)] items-center h-[50px] bg-[var(--background-color)] absolute right-5 bottom-6 cursor-pointer'>
-                        <img src={edit} className='w-[30px]' />
+                        <img src={edit} className='w-[30px]' alt='' />
                     </div>
                 </div>
                 {/* <img src={img} className='h-[242px] rounded-lg shadow-md' /> */}
@@ -177,7 +167,7 @@ const Portfolio = () => {
                         maxWidth: "100%",
                     }}
                 >
-                    {data.map((item, index) => {
+                    {cases.map((item, index) => {
                         return (
                             <ProductBox item={item} key={index} onDelete={deleteClientHandler} />
                         )

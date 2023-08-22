@@ -9,6 +9,7 @@ import { API } from '../../data/config';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import DetailsForm from '../../components/DetailsForm';
 import { dark } from '@mui/material/styles/createPalette';
+import Cookies from 'js-cookie';
 
 const Archive = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const Archive = () => {
     const [showDetails, setShowDetails] = useState(false)
     const [archiveForms, setArchiveForm] = useState(false)
     const [factData, setFactData] = useState(false)
-    const { data } = UseAxiosGet(API.Dentallabs.GET_ARCHIVED)
+    const { data } = UseAxiosGet(`${API.Dentallabs.GET_ARCHIVED}/${Cookies.get("id")}`)
 
     useEffect(() => {
         if (!data) return

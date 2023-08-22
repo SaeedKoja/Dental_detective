@@ -4,10 +4,11 @@ import NotesForm from './NotesForm';
 import { useState } from 'react';
 import { API } from '../data/config';
 import UseAxiosGet from '../hooks/useAxiosGet';
+import Cookies from 'js-cookie';
 
 const Refuzed = ({ onShowDetails, setForms ,setFactData ,forms}) => {
     const [showNotes, setShowNotes] = useState(false);
-    const { data } = UseAxiosGet(API.Dentallabs.GET_REFUZED)
+    const { data } = UseAxiosGet(`${API.Dentallabs.GET_REFUZED}/${Cookies.get("id")}`)
     // const [refuzedForms, setRefuzedForms] = useState([])
 
 

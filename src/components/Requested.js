@@ -6,6 +6,7 @@ import DeleteItem from './DeleteItem';
 import UseAxiosGet from '../hooks/useAxiosGet';
 import { API } from '../data/config';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
     const [del, setDel] = useState();
@@ -16,7 +17,7 @@ const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
 
     const fetchHandler = useCallback(() => {
         axios
-            .get(API.Dentallabs.GET_REQUESTED
+            .get(`${API.Dentallabs.GET_REQUESTED}/${Cookies.get("id")}`
             )
             .then((res) => {
                 setForms(res.data.data);
