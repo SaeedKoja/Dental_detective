@@ -8,14 +8,21 @@ import CaseBox from '../../components/CaseBox';
 import { API } from '../../data/config';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import DetailsForm from '../../components/DetailsForm';
+import { dark } from '@mui/material/styles/createPalette';
 
 const Archive = () => {
     const dispatch = useDispatch();
     const pageRef = useRef(null);
     const [showDetails, setShowDetails] = useState(false)
-    const { data: archiveForms } = UseAxiosGet(API.Dentallabs.GET_ARCHIVED)
+    const [archiveForms, setArchiveForm] = useState(false)
+    const [factData, setFactData] = useState(false)
+    const { data } = UseAxiosGet(API.Dentallabs.GET_ARCHIVED)
 
-    console.log(archiveForms)
+    useEffect(() => {
+        if (!data) return
+        setArchiveForm(data.data)
+        setFactData(data.data)
+    }, [data])
 
     useEffect(() => {
         dispatch(activeAction.replaceActiveState('Archive'))
@@ -26,20 +33,20 @@ const Archive = () => {
     }, []);
 
     const searchHandler = (e) => {
-        //     let searchQuery = e.target.value;
-        //     let resultSearch = doctorsData?.data.filter((doctor) => {
-        //       return (
-        //         doctor.first_name.includes(searchQuery) ||
-        //         doctor.last_name.includes(searchQuery) ||
-        //         doctor.city.country.includes(searchQuery) ||
-        //         doctor.city.name.includes(searchQuery)
-        //       );
-        //     });
-        //     if (searchQuery === "") {
-        //       setDoctors(doctorsData.data);
-        //     } else {
-        //       setDoctors(resultSearch);
-        //     }
+        let searchQuery = e.target.value;
+        let resultSearch = factData?.filter((form) => {
+            return (
+                form.Max_Data.includes(searchQuery) ||
+                form.dentist.name.includes(searchQuery) ||
+                form.patient.name.includes(searchQuery) ||
+                form.status.name.includes(searchQuery)
+            );
+        });
+        if (searchQuery === "") {
+            setArchiveForm(factData);
+        } else {
+            setArchiveForm(resultSearch);
+        }
     };
 
     const showDetailsHandler = (item) => {
@@ -49,7 +56,7 @@ const Archive = () => {
 
     return (
         <div className='pl-[300px] pr-5 py-5' ref={pageRef}>
-             {showDetails && (
+            {showDetails && (
                 <DetailsForm
                     item={showDetails}
                     goBackHandler={() => setShowDetails(false)}
@@ -70,7 +77,7 @@ const Archive = () => {
                     </div>
                 </div>
             </div>
-            {archiveForms && archiveForms.data.map((item, index) => {
+            {archiveForms && archiveForms.map((item, index) => {
                 return (
                     <CaseBox item={item} onShowDetails={showDetailsHandler} key={index} page={0} />
                 )
