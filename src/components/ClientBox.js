@@ -9,21 +9,21 @@ const ClientBox = ({ item, onDelete, page = 'clients' }) => {
         <div className='relative'>
             <div className='client flex flex-col items-center py-4 px-3 pt-10 border-[2px] rounded-l-[18px] rounded-r-[18px] bg-white shadow-sm border-[var(--border-color)]'>
                 <img className='w-[30px] mb-7' src={user} alt=''></img>
-                <p className='text-xl font-bold text-[var(--dark-color)]'>{item.dentist.name}</p>
-                <p className='font-light text-[var(--border-color)]'>{item.dentist.email}</p>
+                <p className='text-xl font-bold text-[var(--dark-color)]'>{page === 'complaints' ? item.dentist.name : item.name}</p>
+                <p className='font-light text-[var(--border-color)]'>{page === 'complaints' ? item.dentist.email : item.email}</p>
                 <div className='flex flex-col justify-start'> <div className='mb-2 flex items-center justify-start mt-5'>
                     <img className='w-[20px] mr-3' src={location} alt=''></img>
-                    <p className='text-[var(--dark-color)] font-light'>{item.dentist.phone}</p>
+                    <p className='text-[var(--dark-color)] font-light'>{page === 'complaints' ? item.dentist.phone : item.phone}</p>
                 </div>
                     <div className='flex items-center'>
                         <img className='w-[20px] mr-3' src={tel} alt=''></img>
-                        <p className='text-[var(--dark-color)] font-light'>{item.dentist.phone}</p>
+                        <p className='text-[var(--dark-color)] font-light'>{page === 'complaints' ? item.dentist.phone : item.phone}</p>
                     </div></div>
                 {page === 'complaints' && <div className='mt-5 flex flex-col items-center'>
                     <p className='mb-2 text-lg font-semibold text-[var(--dark-color)]'>Complaint</p>
                     <p className='text-center text-sm opacity-[0.8] font-light text-[var(--dark-color)]'>{item.complaint}</p>
                 </div>}
-                <img className='w-[30px] mt-7 cursor-pointer' alt='' onClick={() => onDelete(item.id)} src={cancel}></img>
+                {page === 'complaints' && <img className='w-[30px] mt-7 cursor-pointer' alt='' onClick={() => onDelete(item.id)} src={cancel}></img>}
             </div>
         </div>
     );
