@@ -34,7 +34,6 @@ const Portfolio = () => {
         axios
             .get(`${API.Dentallabs.GET_PORTFOLIO}/${Cookies.get("id")}`)
             .then((res) => {
-                console.log(res.data)
                 setPortfolio(res.data.dentallab)
                 setCases(res.data.dentallab.images)
                 if (res.data.dentallab.addresses.length !== 0) setAddress(res.data.dentallab.addresses[0].city)
@@ -84,7 +83,7 @@ const Portfolio = () => {
                 <DeleteItem onConfrim={confrimHandler} onBack={() => setDel(false)} />
             )}
             {showAddForm && (
-                <AddCaseForm goBackHandler={() => setShowAddForm(false)} />
+                <AddCaseForm goBackHandler={() => { setShowAddForm(false); setFetchAgain(!fetchAgain) }} />
             )}
             {editProfile && (
                 <ProfileForm

@@ -7,10 +7,10 @@ import { API } from '../data/config';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
+const Requested = ({ onShowDetails, setForms, setFactData, forms, setFetchAgain, fetchAgain }) => {
     const [del, setDel] = useState();
     const [showApproveForm, setshowApproveForm] = useState(false);
-    const [fetchAgain, setFetchAgain] = useState(false);
+    const [fetchAgainD, setFetchAgainD] = useState(false);
     const [formId, setFormtId] = useState("");
 
     const fetchHandler = useCallback(() => {
@@ -25,7 +25,7 @@ const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
 
     useEffect(() => {
         fetchHandler();
-    }, [fetchHandler, fetchAgain]);
+    }, [fetchHandler, fetchAgainD]);
 
     useEffect(() => {
         setForms([])
@@ -39,6 +39,7 @@ const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
                 setDel(false);
                 setForms(forms.filter((array) => +array.id !== +formId));
                 setFactData(forms.filter((array) => +array.id !== +formId));
+                setFetchAgain(!fetchAgain)
             });
     };
 
@@ -49,6 +50,7 @@ const Requested = ({ onShowDetails, setForms, setFactData, forms }) => {
 
     const approveBackHandler = () => {
         setshowApproveForm(false)
+        setFetchAgainD(!fetchAgainD)
         setFetchAgain(!fetchAgain)
     }
 

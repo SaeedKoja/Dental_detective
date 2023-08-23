@@ -34,16 +34,18 @@ const CaseBox = ({ item, page, onReject, onComplete, onApprove, onShowNotes, onS
                         {page === 2 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
                         {page === 3 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
                         {page === 4 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
+                        {page === 5 && <p className='text-[var(--border-color)]'>{maxDate}</p>}
                     </div>
                 </div>
                 <div className='w-[20%]'>
-                    <p className='mb-2'>Dr. {item.dentist.name}</p>
+                    <p className='mb-2'>{item.dentist.name}</p>
                     <p>P. {item.patient.name}</p>
                 </div>
                 <div className='w-[20%] flex justify-between items-center'>
                     {page === 0 && <p className='text-[#C18CB3]'>archived</p>}
                     {page === 1 && <button onClick={completeHandler} className={` py-[9px] text-[var(--ligth-color)] px-[30px] font-bold bg-[#C18CB3] cursor-pointer rounded-xl`}>Complete</button>}
-                    {page === 2 && <p className='text-[#C18CB3] text-md'>sended</p>}
+                    {page === 2 && <p className='text-[#C18CB3] text-md'>Sended</p>}
+                    {page === 5 && <p className='text-[#C18CB3] text-md'>Lated</p>}
                     {page === 3 && <div className="flex justify-end items-center">
                         <div className="flex flex-col justify-between items-center">
                             <button

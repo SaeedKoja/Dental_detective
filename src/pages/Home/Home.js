@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Home.css';
 import { useDispatch } from "react-redux";
 import { activeAction } from '../../store/active-ui';
@@ -12,6 +12,8 @@ import DetailsForm from '../../components/DetailsForm';
 import UseAxiosGet from '../../hooks/useAxiosGet';
 import { API } from '../../data/config';
 import Cookies from 'js-cookie';
+import Lated from '../../components/Lated';
+import axios from 'axios';
 
 
 const Home = () => {
@@ -19,13 +21,58 @@ const Home = () => {
     const pageRef = useRef(null);
     const [activePage, setActivePage] = useState("Approved")
     const [showDetails, setShowDetails] = useState(false)
+    const [fetchAgain, setFetchAgain] = useState(false)
     const [forms, setForms] = useState([])
     const [factData, setFactData] = useState([])
-    const { data: countRequested } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_REQUESTED}/${Cookies.get("id")}`)
-    const { data: countInProgress } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_IN_PROGRESS}/${Cookies.get("id")}`)
-    const { data: countApproved } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_APPROVED}/${Cookies.get("id")}`)
-    const { data: countRefuzed } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_REFUZED}/${Cookies.get("id")}`)
-    
+    const [countRequested, setCountRequested] = useState("")
+    const [countInProgress, setCountInProgress] = useState("")
+    const [countApproved, setCountApproved] = useState("")
+    const [countRefuzed, setCountRefuzed] = useState("")
+    const [countLated, setCountLated] = useState("")
+    // const { data: countRequested } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_REQUESTED}/${Cookies.get("id")}`)
+    // const { data: countInProgress } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_IN_PROGRESS}/${Cookies.get("id")}`)
+    // const { data: countApproved } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_APPROVED}/${Cookies.get("id")}`)
+    // const { data: countRefuzed } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_REFUZED}/${Cookies.get("id")}`)
+    // const { data: countLated } = UseAxiosGet(`${API.Dentallabs.GET_COUNT_LATED}/${Cookies.get("id")}`)
+
+
+    const fetchHandler = useCallback(() => {
+        axios
+            .get(`${API.Dentallabs.GET_COUNT_REQUESTED}/${Cookies.get("id")}`
+            )
+            .then((res) => {
+                setCountRequested(res.data);
+            });
+        axios
+            .get(`${API.Dentallabs.GET_COUNT_LATED}/${Cookies.get("id")}`
+            )
+            .then((res) => {
+                setCountLated(res.data);
+            });
+        axios
+            .get(`${API.Dentallabs.GET_COUNT_REFUZED}/${Cookies.get("id")}`
+            )
+            .then((res) => {
+                setCountRefuzed(res.data);
+            });
+        axios
+            .get(`${API.Dentallabs.GET_COUNT_IN_PROGRESS}/${Cookies.get("id")}`
+            )
+            .then((res) => {
+                setCountInProgress(res.data);
+            });
+        axios
+            .get(`${API.Dentallabs.GET_COUNT_APPROVED}/${Cookies.get("id")}`
+            )
+            .then((res) => {
+                setCountApproved(res.data);
+            });
+    }, []);
+
+    useEffect(() => {
+        fetchHandler();
+    }, [fetchHandler, fetchAgain]);
+
     useEffect(() => {
         pageRef.current.scrollIntoView({ behavior: "smooth" });
     }, []);
@@ -89,6 +136,13 @@ const Home = () => {
                         <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Requested" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countRequested ? countRequested.count : 0}</div>
                     </li>
                     <li
+                        className={activePage === "Lated" ? "active" : "unactive"}
+                        onClick={() => setActivePage("Lated")}
+                    >
+                        Lated
+                        <div className={`absolute w-6 rounded-full top-2 right-5 flex justify-center items-center h-6 ${activePage === "Lated" ? "bg-[var(--blue-color)]" : "bg-[var(--dark-color)]"}`}>{countLated ? countLated.count : 0}</div>
+                    </li>
+                    <li
                         className={activePage === "Refuzed" ? "active" : "unactive"}
                         onClick={() => setActivePage("Refuzed")}
                     >
@@ -112,10 +166,11 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            {activePage === "Approved" && <Approved forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
-            {activePage === "In progress" && <UnderTrial forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
-            {activePage === "Requested" && <Requested forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
-            {activePage === "Refuzed" && <Refuzed forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "Approved" && <Approved setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "In progress" && <UnderTrial setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "Requested" && <Requested setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "Refuzed" && <Refuzed setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
+            {activePage === "Lated" && <Lated setFetchAgain={setFetchAgain} fetchAgain={fetchAgain} forms={forms} setForms={setForms} setFactData={setFactData} onShowDetails={showDetailsHandler} />}
         </div>
     );
 }

@@ -4,11 +4,16 @@ const DENTALLABS_URL = `${BASE_URL}/Dentallabs`;
 
 export const API = {
   auth: {
-    LOGIN: `${BASE_URL}/users/login`
+    LOGIN: `${BASE_URL}/users/login`,
+    VERIFICATION_CODE:`${BASE_URL}/users/checkemail`,
+    VERIFY:`${BASE_URL}/users/checkcode`,
+    RESET_PASSWORD:`${BASE_URL}/users/updatepassword`
   },
   Dentallabs: {
     GET_APPROVED: `${DENTALLABS_URL}/approved`,
     GET_COUNT_APPROVED: `${DENTALLABS_URL}/countApproved`,
+    GET_LATED: `${DENTALLABS_URL}/latedOrder`,
+    GET_COUNT_LATED: `${DENTALLABS_URL}/countLated`,
     GET_COUNT_REQUESTED: `${DENTALLABS_URL}/countRequested`,
     GET_IN_PROGRESS: `${DENTALLABS_URL}/inprogress`,
     GET_REQUESTED: `${DENTALLABS_URL}/all_Requested`,
@@ -27,6 +32,6 @@ export const API = {
     DELETE_COMPLAINTS: `${DENTALLABS_URL}/deleteComplaint`,
     GET_PORTFOLIO: `${DENTALLABS_URL}/portfolio`,
     EDIT_PORTFOLIO: `${BASE_URL}/labs/editPortfolio`,
-    ADD_CASES: `${BASE_URL}/labs/uploadImage`,
+    ADD_CASES: `${DENTALLABS_URL}/uploadImage`,
   }
 };

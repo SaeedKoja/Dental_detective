@@ -10,16 +10,23 @@ import Archive from "./pages/Archive/Archive";
 import Clients from "./pages/Clients/Clients";
 import Portfolio from "./pages/Portfolio/Portfolio";
 import { useSelector } from "react-redux";
+import ResetPassword from "./pages/Auth/ResetPassword";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
 
 
 function App() {
   const isLogged = useSelector((state) => state.auth.isLogged)
-  console.log(isLogged)
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<RedirectPage />}></Route>
         {!isLogged && <Route path="/Login" element={<Login />}></Route>}
+        {!isLogged && (
+          <Route path="/Reset_password" element={<ResetPassword />}></Route>
+        )}
+        {!isLogged && (
+          <Route path="/ForgotPassword" element={<ForgotPassword />}></Route>
+        )}
         {isLogged && (
           <Route path="/Dental" element={<Dental />}>
             <Route path="Home" element={<Home />}></Route>

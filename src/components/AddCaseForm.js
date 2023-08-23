@@ -1,8 +1,10 @@
 import axios from 'axios';
+import 'boxicons';
 import React, { useState } from 'react';
 import { API } from '../data/config';
 import Cookies from 'js-cookie';
 import swal from 'sweetalert';
+
 
 const AddCaseForm = ({ goBackHandler }) => {
     const [comment, setComment] = useState("")
@@ -11,10 +13,10 @@ const AddCaseForm = ({ goBackHandler }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
+        console.log(image)
         const formData = new FormData();
         formData.append("image", image);
         formData.append("comment", comment);
-        console.log(formData)
         axios
             .post(`${API.Dentallabs.ADD_CASES}/${Cookies.get("id")}`, formData)
             .then((res) => {
@@ -38,7 +40,6 @@ const AddCaseForm = ({ goBackHandler }) => {
 
     const onImageChange = (event) => {
         setImageView(URL.createObjectURL(event.target.files[0]));
-        console.log(event.target.files[0])
         setImage(event.target.files[0]);
     };
 

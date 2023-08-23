@@ -5,7 +5,7 @@ import { API } from '../data/config';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 
-const Approved = ({ onShowDetails, setForms, setFactData, forms }) => {
+const Approved = ({ onShowDetails, setForms, setFactData, forms, fetchAgain, setFetchAgain }) => {
     const { data } = UseAxiosGet(`${API.Dentallabs.GET_APPROVED}/${Cookies.get("id")}`)
 
     useEffect(() => {
@@ -20,6 +20,7 @@ const Approved = ({ onShowDetails, setForms, setFactData, forms }) => {
 
     const completeHandler = (id) => {
         setForms(forms.filter((array) => +array.id !== +id))
+        setFetchAgain(!fetchAgain)
     }
 
     return (

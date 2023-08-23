@@ -135,6 +135,9 @@ const Login = () => {
             </div>
             <p
               className="text-center mt-3 cursor-pointer"
+              onClick={() => {
+                nav("/ForgotPassword");
+              }}
             >
               Forgot Password ?
             </p>
